@@ -163,7 +163,7 @@ namespace tileWorld
                     else
                     {
                         //create the chunk add the chunk to the dictonary
-                        chunkDictonary.Add(chunkKey, new Chunk(Content, ChunkWidth, ChunkHeight, chunkX, chunkY, WorldName));
+                        chunkDictonary.Add(chunkKey, new Chunk(ChunkWidth, ChunkHeight, chunkX, chunkY, WorldName));
                         chunkDictonary[chunkKey].initialize();
                     }
                 }

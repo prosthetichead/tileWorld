@@ -33,10 +33,11 @@ namespace tileWorld
             this.world = world;
         }
 
-        public void FindPath(Vector2 startPoint, Vector2 endPoint)
+        public List<Cell> FindCellPath(Vector2 startPoint, Vector2 endPoint)
         {
             List<PathNode> closedList = new List<PathNode>();
             List<PathNode> openList = new List<PathNode>();
+            List<Cell> cellPath = new List<Cell>();
 
             Cell currentCell = world.getCellFromPixelPos(startPoint);
             Cell endCell = world.getCellFromPixelPos(endPoint);
@@ -68,22 +69,30 @@ namespace tileWorld
                         nextCurrent = node;
                     }
                 }
-               
+
                 openList.Remove(current);
-                current.mapCell.color = Color.Red;
                 closedList.Add(current);
 
 
                 current = nextCurrent;
                 if (current.mapCell.tilePosition == endCell.tilePosition | closedList.Count > 1000)
                 {
-                    current.mapCell.color = Color.Red;
+                    
                     closedList.Add(current);
                     break;
                 }
+            } //while loop
+
+
+            while (current != null)
+            {
+                cellPath.Insert(0, current.mapCell);
+                current.mapCell.color = Color.Red;
+
+                current = current.parent;
             }
 
-            
+            return cellPath;
         }
 
         private bool nodeInList(Cell cell, List<PathNode> nodes)

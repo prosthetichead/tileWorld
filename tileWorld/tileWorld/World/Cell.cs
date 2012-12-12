@@ -11,7 +11,6 @@ namespace tileWorld
     [Serializable]
     public class Cell
     {
-        
         public int TileID;
         public int TileEntityID;
         public bool Collision = false;
@@ -19,6 +18,7 @@ namespace tileWorld
         public bool Hurt = false;
         public bool Occupied = false;
         public Vector2 tilePosition;
+        public Vector2 pixelPosition;
         public string chunkID = "NA";
         public Color color = Color.White;
 

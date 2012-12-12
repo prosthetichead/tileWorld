@@ -23,9 +23,7 @@ namespace tileWorld
         public int ChunkTilesWidth;
         public int ChunkTilesHeight;
         public Cell[,] ChunkBackGroundLayer;
-         //public Object[,] ChunkObjects;
-        public List<NPCData> npcDataList; // list of NPC DATA for saving.
-        
+         //public Object[,] ChunkObjects;        
     }
 
     class Chunk
@@ -33,11 +31,9 @@ namespace tileWorld
 
         private ChunkData chunkData;
         public bool markedForDelete;
-        private ContentManager Content;
      
-        public Chunk(ContentManager content, int chunkTilesWidth, int chunkTilesHeight, int chunkRootPosX, int chunkRootPosY, string worldName)
+        public Chunk( int chunkTilesWidth, int chunkTilesHeight, int chunkRootPosX, int chunkRootPosY, string worldName)
         {
-            Content = content;
             chunkData.WorldName = worldName;
             chunkData.seed = 14;
             Noise2.SetSeed(chunkData.seed);
@@ -214,6 +210,7 @@ namespace tileWorld
                         
                         //System.Console.WriteLine(ChunkRootPosX + ", " + ChunkRootPosY + " " + x + ", " + y);
                         chunkData.ChunkBackGroundLayer[itX, itY].tilePosition = new Vector2(x, y);
+                        chunkData.ChunkBackGroundLayer[itX, itY].pixelPosition = new Vector2(x, y);
                         chunkData.ChunkBackGroundLayer[itX, itY].chunkID = chunkData.ChunkRootPosX + ", " + chunkData.ChunkRootPosY;
 
 

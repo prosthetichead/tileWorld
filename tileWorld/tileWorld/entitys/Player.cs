@@ -25,6 +25,8 @@ namespace tileWorld
         private float speed;
         private float baseSpeed = 1f;
         private double FacingDeg = 0;
+
+        private List<Cell> cellPath;
         
         public int playerSizeHeight = 32;
         public int playerSizeWidth = 32;
@@ -165,7 +167,7 @@ namespace tileWorld
                 FacingDeg = MouseDeg;
                 CurrentState = state.walking;
 
-                pathfinder.FindPath(Position, MouseMoveToPosition);
+               cellPath = pathfinder.FindCellPath(Position, MouseMoveToPosition);
                 System.Console.WriteLine(world.getCenterOfTile(MousePosition));
                 System.Console.WriteLine(MousePosition);
             }
