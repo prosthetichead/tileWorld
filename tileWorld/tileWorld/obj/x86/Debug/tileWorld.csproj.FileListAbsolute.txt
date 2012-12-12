@@ -1,0 +1,34 @@
+d:\users\ashley\documents\visual studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\tileWorld.exe
+d:\users\ashley\documents\visual studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\tileWorld.pdb
+d:\users\ashley\documents\visual studio 2010\Projects\tileWorld\tileWorld\tileWorld\obj\x86\Debug\ResolveAssemblyReference.cache
+d:\users\ashley\documents\visual studio 2010\Projects\tileWorld\tileWorld\tileWorld\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+d:\users\ashley\documents\visual studio 2010\Projects\tileWorld\tileWorld\tileWorld\obj\x86\Debug\tileWorld.exe
+d:\users\ashley\documents\visual studio 2010\Projects\tileWorld\tileWorld\tileWorld\obj\x86\Debug\tileWorld.pdb
+d:\users\ashley\documents\visual studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\tileSets\groundTiles.xnb
+D:\users\Ashley\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\Fonts\Font-FreeSans.xnb
+d:\users\Ashley\documents\visual studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\Fonts\Font-Segoe-5.xnb
+d:\users\Ashley\documents\visual studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\debugBG.xnb
+D:\users\Ashley\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\player.xnb
+D:\users\Ashley\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\player32x64.xnb
+d:\users\Ashley\documents\visual studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\tileSets\itemTiles.xnb
+d:\users\Ashley\documents\visual studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\npc.xnb
+d:\users\Ashley\documents\visual studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\Fonts\Font-PF Arma Five.xnb
+d:\users\Ashley\documents\visual studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\toolTip.xnb
+C:\Users\Nic\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorld\obj\x86\Debug\tileWorld.exe
+C:\Users\Nic\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorld\obj\x86\Debug\tileWorld.pdb
+C:\Users\Nic\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\tileSets\groundTiles.xnb
+C:\Users\Nic\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\player.xnb
+C:\Users\Nic\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\debugBG.xnb
+C:\Users\Nic\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\tileSets\itemTiles.xnb
+C:\Users\Nic\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\npc.xnb
+C:\Users\Nic\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\Fonts\Font-Segoe-5.xnb
+C:\Users\Nic\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\Fonts\Font-PF Arma Five.xnb
+C:\Users\Nic\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\tileWorld.exe
+C:\Users\Nic\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\tileWorld.pdb
+C:\Users\Nic\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorld\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Nic\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorld\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Nic\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\tileSets\TileEntites.xnb
+C:\Users\Nic\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\HUD\smallPlayerInfoBG.xnb
+C:\Users\Nic\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\HUD\largePlayerInfoBG.xnb
+C:\Users\Nic\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\Fonts\Font-PF Ronda Seven.xnb
+C:\Users\Nic\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\Fonts\Font-8bitoperator JVE.xnb

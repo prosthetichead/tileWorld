@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
+  <Asset Type="Pipeline:BuildItemCollection">
+    <Item>
+      <Source>tileSets\groundTiles.png</Source>
+      <Name>tileSets\groundTiles</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Nic\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\tileSets\groundTiles.xnb</Output>
+      <Time>2012-12-02T07:19:17.4373796+10:30</Time>
+    </Item>
+    <Item>
+      <Source>player.png</Source>
+      <Name>player</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Nic\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\player.xnb</Output>
+      <Time>2012-11-05T18:27:35.5671597+10:30</Time>
+    </Item>
+    <Item>
+      <Source>debugBG.png</Source>
+      <Name>debugBG</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Nic\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\debugBG.xnb</Output>
+      <Time>2012-09-12T23:14:53.8238866+09:30</Time>
+    </Item>
+    <Item>
+      <Source>tileSets\itemTiles.png</Source>
+      <Name>tileSets\itemTiles</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Nic\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\tileSets\itemTiles.xnb</Output>
+      <Time>2012-09-12T23:12:01.4230258+09:30</Time>
+    </Item>
+    <Item>
+      <Source>npc.png</Source>
+      <Name>npc</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Nic\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\npc.xnb</Output>
+      <Time>2012-10-03T23:29:54.0272024+09:30</Time>
+    </Item>
+    <Item>
+      <Source>Fonts\Font-Segoe-5.spritefont</Source>
+      <Name>Fonts\Font-Segoe-5</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Nic\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\Fonts\Font-Segoe-5.xnb</Output>
+      <Time>2012-09-09T22:09:42.9542265+09:30</Time>
+    </Item>
+    <Item>
+      <Source>Fonts\Font-PF Arma Five.spritefont</Source>
+      <Name>Fonts\Font-PF Arma Five</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Nic\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\Fonts\Font-PF Arma Five.xnb</Output>
+      <Time>2012-10-06T00:36:52.6801357+09:30</Time>
+    </Item>
+    <Item>
+      <Source>tileSets\TileEntites.png</Source>
+      <Name>tileSets\TileEntites</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Nic\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\tileSets\TileEntites.xnb</Output>
+      <Time>2012-12-02T11:04:14.0103394+10:30</Time>
+    </Item>
+    <Item>
+      <Source>HUD\smallPlayerInfoBG.png</Source>
+      <Name>HUD\smallPlayerInfoBG</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Nic\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\HUD\smallPlayerInfoBG.xnb</Output>
+      <Time>2012-12-02T19:40:10.7359628+10:30</Time>
+    </Item>
+    <Item>
+      <Source>HUD\largePlayerInfoBG.png</Source>
+      <Name>HUD\largePlayerInfoBG</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Nic\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\HUD\largePlayerInfoBG.xnb</Output>
+      <Time>2012-12-07T23:19:40.4959789+10:30</Time>
+    </Item>
+    <Item>
+      <Source>Fonts\Font-PF Ronda Seven.spritefont</Source>
+      <Name>Fonts\Font-PF Ronda Seven</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Nic\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\Fonts\Font-PF Ronda Seven.xnb</Output>
+      <Time>2012-12-12T02:33:58.4924747+10:30</Time>
+    </Item>
+    <Item>
+      <Source>Fonts\Font-8bitoperator JVE.spritefont</Source>
+      <Name>Fonts\Font-8bitoperator JVE</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Nic\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\Fonts\Font-8bitoperator JVE.xnb</Output>
+      <Time>2012-12-08T10:44:14.3359297+10:30</Time>
+    </Item>
+    <BuildSuccessful>true</BuildSuccessful>
+    <Settings>
+      <TargetPlatform>Windows</TargetPlatform>
+      <TargetProfile>HiDef</TargetProfile>
+      <BuildConfiguration>Debug</BuildConfiguration>
+      <CompressContent>false</CompressContent>
+      <RootDirectory>C:\Users\Nic\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorldContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Nic\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorld\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Nic\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorldContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Nic\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\</OutputDirectory>
+    </Settings>
+    <Assemblies>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
+        <Value>2010-08-23T11:41:18+09:30</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.VideoImporters.dll</Key>
+        <Value>2010-08-23T11:41:18+09:30</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
+        <Value>2010-08-23T11:41:18+09:30</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
+        <Value>2010-08-23T11:41:18+09:30</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
+        <Value>2010-08-23T11:41:18+09:30</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
+        <Value>2010-08-23T11:41:18+09:30</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2012-11-05T21:18:24.7092213+10:30</Value>
+      </Assembly>
+    </Assemblies>
+  </Asset>
+</XnaContent>
