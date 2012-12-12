@@ -32,7 +32,7 @@ namespace tileWorld
         private ChunkData chunkData;
         public bool markedForDelete;
      
-        public Chunk( int chunkTilesWidth, int chunkTilesHeight, int chunkRootPosX, int chunkRootPosY, string worldName)
+        public Chunk(int tileWidth, int tileHeight, int chunkTilesWidth, int chunkTilesHeight, int chunkRootPosX, int chunkRootPosY, string worldName)
         {
             chunkData.WorldName = worldName;
             chunkData.seed = 14;
