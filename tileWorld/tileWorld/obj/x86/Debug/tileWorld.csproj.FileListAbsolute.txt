@@ -32,3 +32,21 @@ C:\Users\Nic\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorld
 C:\Users\Nic\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\HUD\largePlayerInfoBG.xnb
 C:\Users\Nic\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\Fonts\Font-PF Ronda Seven.xnb
 C:\Users\Nic\Documents\Visual Studio 2010\Projects\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\Fonts\Font-8bitoperator JVE.xnb
+C:\tileWorld\tileWorld\tileWorld\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\tileWorld\tileWorld\tileWorld\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\tileWorld\tileWorld\tileWorld\obj\x86\Debug\tileWorld.exe
+C:\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\tileSets\groundTiles.xnb
+C:\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\player.xnb
+C:\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\debugBG.xnb
+C:\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\tileSets\itemTiles.xnb
+C:\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\npc.xnb
+C:\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\tileSets\TileEntites.xnb
+C:\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\HUD\smallPlayerInfoBG.xnb
+C:\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\HUD\largePlayerInfoBG.xnb
+C:\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\Fonts\Font-Segoe-5.xnb
+C:\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\Fonts\Font-PF Arma Five.xnb
+C:\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\Fonts\Font-PF Ronda Seven.xnb
+C:\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\Fonts\Font-8bitoperator JVE.xnb
+C:\tileWorld\tileWorld\tileWorld\bin\x86\Debug\tileWorld.exe
+C:\tileWorld\tileWorld\tileWorld\bin\x86\Debug\tileWorld.pdb
+C:\tileWorld\tileWorld\tileWorld\obj\x86\Debug\tileWorld.pdb

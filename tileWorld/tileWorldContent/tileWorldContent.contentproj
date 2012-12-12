@@ -70,9 +70,7 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="equipment\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Compile Include="tileSets\itemTiles.png">
       <Name>itemTiles</Name>

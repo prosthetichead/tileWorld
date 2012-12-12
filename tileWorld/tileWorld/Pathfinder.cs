@@ -21,9 +21,6 @@ namespace tileWorld
             this.g = g;
             this.cost = g + h;
         }
-
-
-
     }
 
     class Pathfinder
@@ -38,8 +35,6 @@ namespace tileWorld
 
         public void FindPath(Vector2 startPoint, Vector2 endPoint)
         {
-            
-
             List<PathNode> closedList = new List<PathNode>();
             List<PathNode> openList = new List<PathNode>();
 
@@ -75,13 +70,20 @@ namespace tileWorld
                 }
                
                 openList.Remove(current);
+                current.mapCell.color = Color.Red;
                 closedList.Add(current);
 
 
                 current = nextCurrent;
                 if (current.mapCell.tilePosition == endCell.tilePosition | closedList.Count > 1000)
+                {
+                    current.mapCell.color = Color.Red;
+                    closedList.Add(current);
                     break;
+                }
             }
+
+            
         }
 
         private bool nodeInList(Cell cell, List<PathNode> nodes)
