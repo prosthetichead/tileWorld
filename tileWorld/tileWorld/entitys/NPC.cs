@@ -46,14 +46,12 @@ namespace tileWorld
      }
 
 
-    public class NPC
+    class NPC
     {
         private NPCData npcData;
         public AnimatedSprite NpcSprite;
-        private Cell CurrentCell = new Cell(0);
-        private Cell OldCurrentCell = new Cell(0);
-        private Cell NextCell = new Cell(0);
-        private Cell OldNextCell = new Cell(0);
+        private Pathfinder pathfinder;
+        private List<Cell> cellPath;
         
         public enum state {walkingToPlayer, swimming, idle, returnHome, attacking};
         public state CurrentState = state.idle;
@@ -68,7 +66,7 @@ namespace tileWorld
         /// <param name="textureName">name of the content this NPC will use</param>
         /// <param name="npcHeight">height in pixels</param>
         /// <param name="npcWidth">width in pixels</param>
-        public NPC(ContentManager Content, Vector2 position, string name, string textureName, int npcHeight, int npcWidth)
+        public NPC(ContentManager Content, World world, Vector2 position, string name, string textureName, int npcHeight, int npcWidth)
         {
             npcData.Name = name;
             npcData.NpcHeight = npcHeight;
@@ -82,6 +80,7 @@ namespace tileWorld
 
             NpcSprite = new AnimatedSprite(Content, textureName, npcHeight, npcWidth);
             fontTiny = Content.Load<SpriteFont>(@"Fonts/Font-PF Arma Five");
+            pathfinder = new Pathfinder(world);
         }
         public NPC(ContentManager Content, NPCData npcData)
         {
@@ -122,23 +121,9 @@ namespace tileWorld
 
         public void update(GameTime gameTime, Vector2 playerPos)
         {
-            //Vector2 moveTolocation;
-            // Vector2 distanceToLocation;
              float distanceToPlayer;
 
-            //if (CurrentState == state.walking)
-            //    moveTolocation = playerPos;
-            //else if (CurrentState == state.returnHome)
-            //    moveTolocation = npcData.OriginalPosition;
-            //else
-            //    moveTolocation = Vector2.Zero;
-
-            //distanceToLocation = moveTolocation - npcData.Position;
              distanceToPlayer = Vector2.Distance(playerPos, npcData.Position);
-
-            //distanceToLocation.X = Math.Abs(distanceToLocation.X);
-            //distanceToLocation.Y = Math.Abs(distanceToLocation.Y);
-
 
              if (distanceToPlayer <= npcData.visiblityRange)
                 CurrentState = state.walkingToPlayer; //Change State To walking
@@ -147,6 +132,7 @@ namespace tileWorld
 
             if (CurrentState == state.walkingToPlayer)
             {
+                cellPath = pathfinder.FindCellPath(npcData.Position, playerPos);
                 npcData.Direction = playerPos - npcData.Position;
                 if (distanceToPlayer <= 20)
                     CurrentState = state.attacking;
@@ -160,8 +146,7 @@ namespace tileWorld
                     CurrentState = state.idle;
                 npcData.Direction.Normalize();
             }
-            
-            
+         
             
             if (CurrentState == state.idle)
             {
@@ -171,12 +156,6 @@ namespace tileWorld
             {
                 npcData.Direction = Vector2.Zero;
             }      
-
-            //CurrentCell = cellArray[1, 1];
-            //NextCell = cellArray[1 - (int)npcData.Direction.X, 1 - (int)npcData.Direction.Y];
-
-            //test if cell is occupied.
-           
 
             npcData.Position += npcData.Direction * ((float)gameTime.ElapsedGameTime.TotalSeconds * npcData.speed);
          }

@@ -31,7 +31,9 @@ namespace tileWorld
 
         private ChunkData chunkData;
         public bool markedForDelete;
-     
+        private int tileWidth;
+        private int tileHeight;
+
         public Chunk(int tileWidth, int tileHeight, int chunkTilesWidth, int chunkTilesHeight, int chunkRootPosX, int chunkRootPosY, string worldName)
         {
             chunkData.WorldName = worldName;
@@ -47,6 +49,8 @@ namespace tileWorld
             chunkData.ChunkTilesHeight = chunkTilesHeight;
             chunkData.ChunkRootPosX = chunkRootPosX;
             chunkData.ChunkRootPosY = chunkRootPosY;
+            this.tileWidth = tileHeight;
+            this.tileHeight = tileWidth;
             
             chunkData.ChunkBackGroundLayer = new Cell[chunkData.ChunkTilesWidth, chunkData.ChunkTilesHeight];
         }
@@ -210,7 +214,8 @@ namespace tileWorld
                         
                         //System.Console.WriteLine(ChunkRootPosX + ", " + ChunkRootPosY + " " + x + ", " + y);
                         chunkData.ChunkBackGroundLayer[itX, itY].tilePosition = new Vector2(x, y);
-                        chunkData.ChunkBackGroundLayer[itX, itY].pixelPosition = new Vector2(x, y);
+                        chunkData.ChunkBackGroundLayer[itX, itY].pixelPosition = new Vector2(x*tileWidth, y*tileHeight);
+                        chunkData.ChunkBackGroundLayer[itX, itY].pixelPositionCenter = new Vector2((x * tileWidth)+(tileWidth/2), (y * tileHeight)+(tileHeight/2));
                         chunkData.ChunkBackGroundLayer[itX, itY].chunkID = chunkData.ChunkRootPosX + ", " + chunkData.ChunkRootPosY;
 
 

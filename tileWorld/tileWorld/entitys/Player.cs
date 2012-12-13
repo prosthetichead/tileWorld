@@ -20,10 +20,9 @@ namespace tileWorld
         public Vector2 Position = Vector2.Zero;
         public Vector2 PixelPosition = Vector2.Zero;
         public Vector2 Direction = Vector2.Zero;
-        Vector2 MouseMoveToPosition = Vector2.Zero;
+        public Vector2 MoveToPos = Vector2.Zero;
 
-        private float speed;
-        private float baseSpeed = 1f;
+        private float speed = 60f;
         private double FacingDeg = 0;
 
         private List<Cell> cellPath;
@@ -51,15 +50,7 @@ namespace tileWorld
 
 
 
-        private void updatePosition(GameTime gameTime)
-        {
-            if (CurrentState == state.walking) //Walking Up.
-            {
-                speed = 50f + baseSpeed; // tiles per update
-                Position += Direction * (float)gameTime.ElapsedGameTime.TotalSeconds * speed;
-            }
 
-        }
 
         private void updateAnimation(double FacingDeg, GameTime gameTime)
         {
@@ -150,6 +141,7 @@ namespace tileWorld
             Vector2 MouseDirection = Vector2.Zero;
             double MouseDeg;
             Vector2 MousePosition = Vector2.Zero;
+            
 
             //get mouse location
             MousePosition = input.mousePos();
@@ -162,32 +154,38 @@ namespace tileWorld
 
             if (input.mouseLeftClick())
             {
-                Direction = MouseDirection;
-                MouseMoveToPosition = MousePosition;
-                FacingDeg = MouseDeg;
                 CurrentState = state.walking;
-
-               cellPath = pathfinder.FindCellPath(Position, MouseMoveToPosition);
-                System.Console.WriteLine(world.getCenterOfTile(MousePosition));
-                System.Console.WriteLine(MousePosition);
+                cellPath = pathfinder.FindCellPath(Position, MousePosition);
             }
 
             //is player moving already?
             if (CurrentState == state.walking)
             {
-                if (((MouseMoveToPosition.X - Position.X) > -0.5 & (MouseMoveToPosition.X - Position.X) < 0.5) & ((MouseMoveToPosition.Y - Position.Y) > -0.5 & (MouseMoveToPosition.Y - Position.Y) < 0.5))
+                MoveToPos = cellPath[0].pixelPositionCenter;
+                if (Vector2.Distance(Position, MoveToPos) > 1)
                 {
+                    System.Console.WriteLine(Vector2.Distance(Position, MoveToPos));
+                    Direction = MoveToPos - Position;
+                    Direction.Normalize();
+                    FacingDeg = Math.Atan2(Direction.X, Direction.Y);
+                    FacingDeg = FacingDeg * 180 / Math.PI;
+                    Position += Direction * (float)gameTime.ElapsedGameTime.TotalSeconds * speed;
+                }
+                else
+                {
+                    cellPath[0].color = Color.White;
+                    cellPath.RemoveAt(0);                    
+                }   
+                if (cellPath.Count == 0)
                     CurrentState = state.idle;
-                }                
             }
             if (CurrentState == state.idle)
             {
                 FacingDeg = MouseDeg;
             }
 
-            updatePosition(gameTime);
-            updateAnimation(FacingDeg, gameTime);
 
+            updateAnimation(FacingDeg, gameTime);
         }
 
         public void Draw(SpriteBatch spriteBatch)

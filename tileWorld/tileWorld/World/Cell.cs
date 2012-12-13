@@ -19,6 +19,7 @@ namespace tileWorld
         public bool Occupied = false;
         public Vector2 tilePosition;
         public Vector2 pixelPosition;
+        public Vector2 pixelPositionCenter;
         public string chunkID = "NA";
         public Color color = Color.White;
 

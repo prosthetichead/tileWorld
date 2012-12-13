@@ -25,7 +25,7 @@ namespace tileWorld
         {
             pos.X = (int)pos.X;
             pos.Y = (int)pos.Y;
-            NPCs.Add(new NPC(Content,pos,"NPC-"+pos,"npc",32,32));
+            NPCs.Add(new NPC(Content,GameWorld, pos,"NPC-"+pos,"npc",32,32));
 
         }
 
