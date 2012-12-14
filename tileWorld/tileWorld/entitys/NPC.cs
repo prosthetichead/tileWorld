@@ -1,10 +1,4 @@
-﻿/*
- * -------------------------------------------------------------------------------
- * NPC Class
- * Copyright (c) 2012 Ashley Colman
- * All Rights Reserved
- * -------------------------------------------------------------------------------*/ 
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -52,6 +46,8 @@ namespace tileWorld
         public AnimatedSprite NpcSprite;
         private Pathfinder pathfinder;
         private List<Cell> cellPath;
+        private Vector2 LastPlayerPos;
+        private Vector2 WalkToPos;
         
         public enum state {walkingToPlayer, swimming, idle, returnHome, attacking};
         public state CurrentState = state.idle;
@@ -81,6 +77,7 @@ namespace tileWorld
             NpcSprite = new AnimatedSprite(Content, textureName, npcHeight, npcWidth);
             fontTiny = Content.Load<SpriteFont>(@"Fonts/Font-PF Arma Five");
             pathfinder = new Pathfinder(world);
+            cellPath = new List<Cell>();
         }
         public NPC(ContentManager Content, NPCData npcData)
         {
@@ -126,17 +123,30 @@ namespace tileWorld
              distanceToPlayer = Vector2.Distance(playerPos, npcData.Position);
 
              if (distanceToPlayer <= npcData.visiblityRange)
-                CurrentState = state.walkingToPlayer; //Change State To walking
-            else
+             {
+                 CurrentState = state.walkingToPlayer; //Change State To walking
+             }
+             else
                  CurrentState = state.returnHome;
+             
+            if (distanceToPlayer <= 20)
+                 CurrentState = state.attacking; 
+
 
             if (CurrentState == state.walkingToPlayer)
             {
-                cellPath = pathfinder.FindCellPath(npcData.Position, playerPos);
-                npcData.Direction = playerPos - npcData.Position;
-                if (distanceToPlayer <= 20)
-                    CurrentState = state.attacking;
-                npcData.Direction.Normalize();
+                if (cellPath.Count == 0)
+                {
+                    cellPath = pathfinder.FindCellPath(npcData.Position, playerPos);
+                }
+                if (Vector2.Distance(cellPath[0].pixelPositionCenter, npcData.Position) > 1)
+                {
+
+                    npcData.Direction = cellPath[0].pixelPositionCenter - npcData.Position;
+                    npcData.Direction.Normalize();
+                }
+                else
+                    cellPath.RemoveAt(0); 
             }
             
             if (CurrentState == state.returnHome)
@@ -155,7 +165,7 @@ namespace tileWorld
             if (CurrentState == state.attacking)
             {
                 npcData.Direction = Vector2.Zero;
-            }      
+            }
 
             npcData.Position += npcData.Direction * ((float)gameTime.ElapsedGameTime.TotalSeconds * npcData.speed);
          }
