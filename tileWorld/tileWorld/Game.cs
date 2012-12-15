@@ -29,7 +29,7 @@ namespace tileWorld
 
         Player player;
         World gameWorld;
-        NPCGenerator npcGenerator;
+        NPC_Manager npcManager;
         Hud hud;
         InputHandler input;
         
@@ -69,7 +69,7 @@ namespace tileWorld
             // TODO: Add your initialization logic here
 
             base.Initialize();
-            Vector2 playerStartPos = new Vector2(2, 2);
+            Vector2 playerStartPos = new Vector2(43, 2);
 
             Camara.screenResWidth = screenResWidth;
             Camara.screenResHeight = screenResHeight;
@@ -82,7 +82,7 @@ namespace tileWorld
             player = new Player(Content, gameWorld);
             player.Position = playerStartPos;// gameWorld.playerStartTile();
 
-            npcGenerator = new NPCGenerator(Content, gameWorld);
+            npcManager = new NPC_Manager(Content, gameWorld);
 
             hud = new Hud(Content, GraphicsDevice, player);
 
@@ -131,7 +131,7 @@ namespace tileWorld
 
             if (input.keyBoardKeyPress(Keys.Q) & debugMode)
             {
-                npcGenerator.GenNPC_atPos(player.Position);
+                npcManager.GenNPC_atPos(player.Position);
             }
             if (input.keyBoardKeyPress(Keys.OemOpenBrackets))
             {
@@ -143,10 +143,10 @@ namespace tileWorld
             }
 
             hud.Update(input); 
-            player.Update(gameTime, input);
+            player.Update(gameTime, npcManager, input);
 
             gameWorld.Update(gameTime, player.Position);
-            npcGenerator.update(gameTime, player.Position);
+            npcManager.update(gameTime, player.Position);
 
             Camara.Location.X = (int)(player.Position.X) - GraphicsDevice.Viewport.Width / 2;
             Camara.Location.Y = (int)(player.Position.Y) - GraphicsDevice.Viewport.Height / 2;
@@ -171,7 +171,7 @@ namespace tileWorld
             
                 gameWorld.Draw(spriteBatch);
                 player.Draw(spriteBatch);
-                npcGenerator.Draw(spriteBatch);
+                npcManager.Draw(spriteBatch);
             
             spriteBatch.End();
 

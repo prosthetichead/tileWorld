@@ -31,6 +31,7 @@ namespace tileWorld
         public int playerSizeWidth = 32;
 
         private float playerDamage;
+        private float maxHP;
 
         AnimatedSprite playerSprite;
         World world;
@@ -45,7 +46,7 @@ namespace tileWorld
 
         public float playerHP()
         {
-            return 200- playerDamage;
+            return maxHP - playerDamage;
         }
 
 
@@ -136,7 +137,7 @@ namespace tileWorld
             playerSprite.nextFrame(gameTime);
         }
 
-        public void Update(GameTime gameTime, InputHandler input)
+        public void Update(GameTime gameTime, NPC_Manager npcManager, InputHandler input)
         {           
             Vector2 MouseDirection = Vector2.Zero;
             double MouseDeg;
@@ -154,6 +155,10 @@ namespace tileWorld
 
             if (input.mouseLeftClick())
             {
+                //Find out what was clicked. Empty cell to walk too, or an NPC.
+                System.Console.WriteLine(world.getCellFromPixelPos(MousePosition).Collision);
+                if(npcManager.getNPCatPos(MousePosition) != null)
+                    System.Console.WriteLine(npcManager.getNPCatPos(MousePosition).CurrentState);
                 CurrentState = state.walking;
                 cellPath = pathfinder.FindCellPath(Position, MousePosition);
             }

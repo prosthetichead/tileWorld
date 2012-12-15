@@ -8,13 +8,13 @@ using Microsoft.Xna.Framework.Content;
 
 namespace tileWorld
 {
-    class NPCGenerator
+    class  NPC_Manager
     {
         List<NPC> NPCs;
         ContentManager Content;
         World GameWorld;
 
-        public NPCGenerator(ContentManager content, World gameWorld)
+        public NPC_Manager(ContentManager content, World gameWorld)
         {
             Content = content;
             NPCs = new List<NPC>();
@@ -29,12 +29,20 @@ namespace tileWorld
 
         }
 
+        public NPC getNPCatPos(Vector2 pos)
+        {
+            foreach (NPC npc in NPCs)
+            {
+                if (npc.BoundingBox.Contains((int)pos.X, (int)pos.Y))
+                    return npc;
+            }
+            return null;
+        }
+
         public void update(GameTime gameTime, Vector2 playerPos)
         {
             foreach (NPC npc in NPCs)
             {
-                //Cell cell = GameWorld.getCell((int)npc.getTilePosition().X, (int)npc.getTilePosition().Y);
-                //Cell[,] cellArray = GameWorld.getCellArray((int)npc.getPosition().X, (int)npc.getPosition().Y);
                 npc.update(gameTime, playerPos);
                 foreach (NPC checkNpc in NPCs)
                 {

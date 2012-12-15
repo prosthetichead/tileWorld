@@ -69,7 +69,8 @@ namespace tileWorld
                         }
                         else
                         {
-                            getPathNodeByCell(cell, openList).cost = g + distance;
+                            PathNode node = getPathNodeByCell(cell, openList);
+                            node.cost = g + distance;
                         }
                     }
                 }
@@ -89,7 +90,7 @@ namespace tileWorld
 
 
                 current = nextCurrent;
-                if (current.mapCell.tilePosition == endCell.tilePosition | closedList.Count > 10000)
+                if (current.mapCell.tilePosition == endCell.tilePosition | closedList.Count > 1000)
                 {
                     
                     closedList.Add(current);
