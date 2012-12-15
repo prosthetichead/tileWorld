@@ -50,12 +50,26 @@ namespace tileWorld
                 Cell[] adjacentcells = world.getCellArray(current.mapCell);
                 foreach (Cell cell in adjacentcells)
                 {
-                    if (!cell.Collision)
+                    if (!cell.Collision & !nodeInList(cell, closedList))
                     {
-                        if (!nodeInList(cell, openList) & !nodeInList(cell, closedList) )
+                        int distance = (int)Vector2.Distance(cell.tilePosition, endCell.tilePosition);
+                        int g;
+                        if (cell.tilePosition.X != currentCell.tilePosition.X & cell.tilePosition.Y != currentCell.tilePosition.Y)
                         {
-                            int distance = (int)Vector2.Distance(cell.tilePosition, endCell.tilePosition);
-                            openList.Add(new PathNode(cell, current, 0, distance));                            
+                            g = 14;
+                        }
+                        else
+                        {
+                            g= 10;
+                        }
+
+                        if (!nodeInList(cell, openList))
+                        {
+                            openList.Add(new PathNode(cell, current, g, distance));
+                        }
+                        else
+                        {
+                            getPathNodeByCell(cell, openList).cost = g + distance;
                         }
                     }
                 }
@@ -75,7 +89,7 @@ namespace tileWorld
 
 
                 current = nextCurrent;
-                if (current.mapCell.tilePosition == endCell.tilePosition | closedList.Count > 1000)
+                if (current.mapCell.tilePosition == endCell.tilePosition | closedList.Count > 10000)
                 {
                     
                     closedList.Add(current);
@@ -103,6 +117,18 @@ namespace tileWorld
             }
 
             return false;
+        }
+
+
+        private PathNode getPathNodeByCell(Cell cell, List<PathNode> nodes)
+        {
+            foreach (PathNode node in nodes)
+            {
+                if (cell == node.mapCell)
+                    return node;
+            }
+
+            return null;
         }
 
     }

@@ -164,7 +164,6 @@ namespace tileWorld
                 MoveToPos = cellPath[0].pixelPositionCenter;
                 if (Vector2.Distance(Position, MoveToPos) > 1)
                 {
-                    System.Console.WriteLine(Vector2.Distance(Position, MoveToPos));
                     Direction = MoveToPos - Position;
                     Direction.Normalize();
                     FacingDeg = Math.Atan2(Direction.X, Direction.Y);
