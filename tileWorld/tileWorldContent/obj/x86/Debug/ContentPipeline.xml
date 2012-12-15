@@ -109,6 +109,15 @@
       <Output>C:\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\Fonts\Font-8bitoperator JVE.xnb</Output>
       <Time>2012-12-08T10:44:14.3359297+10:30</Time>
     </Item>
+    <Item>
+      <Source>HUD\curser.png</Source>
+      <Name>HUD\curser</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\HUD\curser.xnb</Output>
+      <Time>2012-12-16T00:30:43.2781589+10:30</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

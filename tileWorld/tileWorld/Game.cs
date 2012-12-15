@@ -142,7 +142,7 @@ namespace tileWorld
                 Camara.zoom -= .001f;
             }
 
-            hud.Update(input); 
+            hud.Update(input, npcManager); 
             player.Update(gameTime, npcManager, input);
 
             gameWorld.Update(gameTime, player.Position);

@@ -102,7 +102,7 @@ namespace tileWorld
         {
             get
             {
-                return new Rectangle((int)npcData.Position.X, (int)npcData.Position.Y, npcData.NpcWidth, npcData.NpcHeight);
+                return new Rectangle((int)npcData.Position.X - (npcData.NpcWidth / 2), (int)npcData.Position.Y - (npcData.NpcHeight / 2), npcData.NpcWidth, npcData.NpcHeight);
             }
         }
 

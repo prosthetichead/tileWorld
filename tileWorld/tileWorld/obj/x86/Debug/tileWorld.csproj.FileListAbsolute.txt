@@ -50,3 +50,4 @@ C:\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\Fonts\Font-8bitoperator J
 C:\tileWorld\tileWorld\tileWorld\bin\x86\Debug\tileWorld.exe
 C:\tileWorld\tileWorld\tileWorld\bin\x86\Debug\tileWorld.pdb
 C:\tileWorld\tileWorld\tileWorld\obj\x86\Debug\tileWorld.pdb
+C:\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\HUD\curser.xnb

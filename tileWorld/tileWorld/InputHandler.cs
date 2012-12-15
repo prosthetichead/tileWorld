@@ -23,7 +23,7 @@ namespace tileWorld
         {
             this.game = game;
 
-            game.IsMouseVisible = true;
+            game.IsMouseVisible = false;
             mouseState = Mouse.GetState();
             keyState = Keyboard.GetState();
         }
