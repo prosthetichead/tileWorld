@@ -81,7 +81,7 @@ namespace tileWorld
         public Cell[] getCellArray(Cell cell)
         {
 
-            Cell[] CellArray = new Cell[8];
+            Cell[] CellArray = new Cell[4];
             int X = (int)cell.tilePosition.X;
             int Y = (int)cell.tilePosition.Y;
 
@@ -89,10 +89,10 @@ namespace tileWorld
             CellArray[1] = getCell(X - 1, Y);
             CellArray[2] = getCell(X, Y + 1);
             CellArray[3] = getCell(X, Y - 1);
-            CellArray[4] = getCell(X + 1, Y + 1);
-            CellArray[5] = getCell(X - 1, Y - 1);
-            CellArray[6] = getCell(X + 1, Y - 1);
-            CellArray[7] = getCell(X - 1, Y + 1);
+           // CellArray[4] = getCell(X + 1, Y + 1);
+           // CellArray[5] = getCell(X - 1, Y - 1);
+           // CellArray[6] = getCell(X + 1, Y - 1);
+           // CellArray[7] = getCell(X - 1, Y + 1);
 
             return CellArray;
 

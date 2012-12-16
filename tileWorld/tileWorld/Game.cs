@@ -41,8 +41,8 @@ namespace tileWorld
         int TileSizeWidth = 32; //size of each tile in pixels
         int TileSizeHeight = 32; //size of each tile in pixels
 
-        int screenResWidth = 900;
-        int screenResHeight = 600;
+        int screenResWidth = 1280;
+        int screenResHeight = 720;
 
        
 
@@ -146,7 +146,7 @@ namespace tileWorld
             player.Update(gameTime, npcManager, input);
 
             gameWorld.Update(gameTime, player.Position);
-            npcManager.update(gameTime, player.Position);
+            npcManager.update(gameTime, player);
 
             Camara.Location.X = (int)(player.Position.X) - GraphicsDevice.Viewport.Width / 2;
             Camara.Location.Y = (int)(player.Position.Y) - GraphicsDevice.Viewport.Height / 2;

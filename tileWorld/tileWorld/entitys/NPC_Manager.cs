@@ -39,11 +39,11 @@ namespace tileWorld
             return null;
         }
 
-        public void update(GameTime gameTime, Vector2 playerPos)
+        public void update(GameTime gameTime, Player player)
         {
             foreach (NPC npc in NPCs)
             {
-                npc.update(gameTime, playerPos);
+                npc.update(gameTime, player);
                 foreach (NPC checkNpc in NPCs)
                 {
                     if (checkNpc != npc) //dont check yourself!

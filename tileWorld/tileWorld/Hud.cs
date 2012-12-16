@@ -76,8 +76,6 @@ namespace tileWorld
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            
-
             spriteBatch.Draw(smallPlayerInfoBG, smallPlayerInfoBG_R, Color.White);
             if (hoverSmallPlayerInfo)
                 spriteBatch.DrawString(smallFont, " "+ player.playerHP(), new Vector2(smallPlayerInfoBG_R.Location.X+10,smallPlayerInfoBG_R.Location.Y), Color.White);

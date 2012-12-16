@@ -52,6 +52,9 @@ namespace tileWorld
         public enum state {walkingToPlayer, swimming, idle, returnHome, attacking};
         public state CurrentState = state.idle;
 
+        private float attackSpeedTimer = 2;
+        private float attackSpeed = 2;
+
         SpriteFont fontTiny;
 
         /// <summary>
@@ -116,11 +119,11 @@ namespace tileWorld
         }
 
 
-        public void update(GameTime gameTime, Vector2 playerPos)
+        public void update(GameTime gameTime, Player player)
         {
              float distanceToPlayer;
 
-             distanceToPlayer = Vector2.Distance(playerPos, npcData.Position);
+             distanceToPlayer = Vector2.Distance(player.Position, npcData.Position);
 
              if (distanceToPlayer <= npcData.visiblityRange)
              {
@@ -137,7 +140,7 @@ namespace tileWorld
             {
                 if (cellPath.Count == 0)
                 {
-                    cellPath = pathfinder.FindCellPath(npcData.Position, playerPos);
+                    cellPath = pathfinder.FindCellPath(npcData.Position, player.Position);
                 }
                 if (Vector2.Distance(cellPath[0].pixelPositionCenter, npcData.Position) > 1)
                 {
@@ -165,10 +168,27 @@ namespace tileWorld
             if (CurrentState == state.attacking)
             {
                 npcData.Direction = Vector2.Zero;
+                attackSpeedTimer = attackSpeedTimer - (float)gameTime.ElapsedGameTime.TotalSeconds;
+                
+                if (attackSpeedTimer <= 0)
+                {
+                    player.attack(attackRoll());
+                    attackSpeedTimer = attackSpeed;
+                    
+                }
             }
 
             npcData.Position += npcData.Direction * ((float)gameTime.ElapsedGameTime.TotalSeconds * npcData.speed);
          }
+
+        private int attackRoll()
+        {
+            // CALC A REAL ATTACK ROLL HERE!
+            Random ran = new Random();
+            int attackRoll = ran.Next(1, 8);            
+            return attackRoll;
+
+        }
 
         public void draw(SpriteBatch spriteBatch)
         {

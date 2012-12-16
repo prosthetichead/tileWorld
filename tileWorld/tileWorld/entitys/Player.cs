@@ -31,17 +31,23 @@ namespace tileWorld
         public int playerSizeWidth = 32;
 
         private float playerDamage;
-        private float maxHP;
+        private float maxHP = 100;
 
         AnimatedSprite playerSprite;
         World world;
         Pathfinder pathfinder;
-        
+        SpriteFont damageFont;
+
+        private bool attacked = false;
+        private int damage = 0;
+
+
         public Player(ContentManager Content, World world)
         {
             playerSprite = new AnimatedSprite(Content, "player", playerSizeWidth, playerSizeHeight);
             this.world = world;
             pathfinder = new Pathfinder(world);
+            damageFont = Content.Load<SpriteFont>(@"Fonts/Font-8bitoperator JVE");
         }
 
         public float playerHP()
@@ -137,6 +143,15 @@ namespace tileWorld
             playerSprite.nextFrame(gameTime);
         }
 
+        public void attack(int attackRoll)
+        {
+            Random roll = new Random((int)DateTime.Now.Ticks);
+            int Defend = roll.Next(1, 8);
+            damage = attackRoll - Defend;
+            playerDamage = playerDamage + damage;
+            attacked = true;
+        }
+
         public void Update(GameTime gameTime, NPC_Manager npcManager, InputHandler input)
         {           
             Vector2 MouseDirection = Vector2.Zero;
@@ -196,10 +211,14 @@ namespace tileWorld
         {
            PixelPosition.X = Camara.screenResWidth / 2;
            PixelPosition.Y = Camara.screenResHeight / 2;
-           
-           playerSprite.Draw(spriteBatch, PixelPosition);
 
-            
+ 
+
+           playerSprite.Draw(spriteBatch, PixelPosition);
+           if (attacked)
+           {
+               spriteBatch.DrawString(damageFont, " " + damage, PixelPosition, Color.Red);
+           }
         }
 
     }
