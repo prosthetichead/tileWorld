@@ -112,6 +112,7 @@
     <Compile Include="entitys\NPC_Manager.cs" />
     <Compile Include="Hud.cs" />
     <Compile Include="InputHandler.cs" />
+    <Compile Include="MessageSystem.cs" />
     <Compile Include="Pathfinder.cs" />
     <Compile Include="World\Camara.cs" />
     <Compile Include="World\Cell.cs" />

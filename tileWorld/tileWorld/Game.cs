@@ -148,6 +148,8 @@ namespace tileWorld
             gameWorld.Update(gameTime, player.Position);
             npcManager.update(gameTime, player);
 
+            MessageSystem.Instance.Update(gameTime);
+
             Camara.Location.X = (int)(player.Position.X) - GraphicsDevice.Viewport.Width / 2;
             Camara.Location.Y = (int)(player.Position.Y) - GraphicsDevice.Viewport.Height / 2;
 
@@ -172,6 +174,7 @@ namespace tileWorld
                 gameWorld.Draw(spriteBatch);
                 player.Draw(spriteBatch);
                 npcManager.Draw(spriteBatch);
+                MessageSystem.Instance.Draw(spriteBatch);
             
             spriteBatch.End();
 

@@ -17,37 +17,40 @@ public class MessageSystem {
         public Vector2 Pos;
         public float Duration;
         public float Alpha;
+        public Color Colour;
     }
 
     List<Message> Messages = new List<Message>();
 
-    public void Show(string data, Vector2 pos, float duration, SpriteFont font, int alpha)
+    public void Show(string data, Vector2 pos, float duration, SpriteFont font, int alpha, Color color)
     {
-        Messages.Add(new Message() { Data = data, Font = font, Pos = pos, Duration = duration, Alpha = alpha});
+        Messages.Add(new Message() { Data = data, Font = font, Pos = pos, Duration = duration, Alpha = alpha, Colour = color});
     }
     public void Update(GameTime gameTime) {  // == (float) gametime.ElapsedTime.TotalSeconds
 
-       for (int i=0; i < Messages.Count; )
+       for(int i=0; i < Messages.Count(); i++)
        {
-           Messages[i].Duration -= (float)gameTime.ElapsedGameTime.TotalSeconds;
-           if (Messages[i].Duration < 0)
+            Messages[i].Duration -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+            Messages[i].Pos.Y -= .5f;
+          if (Messages[i].Duration < 0)
            {
-                Messages.RemoveAt(i);
-                continue;
+               Messages.RemoveAt(i);
+               continue;
            }
-           i++;
        }
     }
 
 
     public void Draw(SpriteBatch batch)
     {
-       batch.Begin();
-       for (int i=0; i<Messages.Length; )
-       {
-            batch.DrawString(Message[i].Font, ....)
-       }
-       batch.end()
+        Color color;
+        foreach(Message M in Messages)
+        {
+            color = M.Colour;
+            batch.DrawString(M.Font, M.Data, new Vector2(M.Pos.X + 1, M.Pos.Y + 1), Color.Black);
+            batch.DrawString(M.Font, M.Data, M.Pos, color);
+        }
+       
     }
 }
 }
