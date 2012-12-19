@@ -38,7 +38,6 @@ namespace tileWorld
         Pathfinder pathfinder;
         SpriteFont damageFont;
 
-        private bool attacked = false;
         private int damage = 0;
 
 
@@ -143,7 +142,7 @@ namespace tileWorld
             playerSprite.nextFrame(gameTime);
         }
 
-        public bool attack(int attackRoll)
+        public bool attacked(int attackRoll)
         {
             Random roll = new Random((int)DateTime.Now.Ticks);
             int Defend = roll.Next(1, 8);
@@ -153,12 +152,11 @@ namespace tileWorld
             if (damage > 0)
             {
                 MessageSystem.Instance.Show("" + damage, new Vector2(PixelPosition.X, PixelPosition.Y - 5), 1f, damageFont, 1, Color.Red);
-                attacked = true;
+                
                 return true;
             }
             else
             {
-                attacked = false;
                 return false;
             }
         }

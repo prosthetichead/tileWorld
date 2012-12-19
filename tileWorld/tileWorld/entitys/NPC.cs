@@ -172,7 +172,7 @@ namespace tileWorld
                 
                 if (attackSpeedTimer <= 0)
                 {
-                    player.attack(attackRoll());
+                    player.attacked(attackRoll());
                     attackSpeedTimer = attackSpeed;
                     
                 }

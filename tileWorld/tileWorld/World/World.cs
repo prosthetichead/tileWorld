@@ -256,24 +256,21 @@ namespace tileWorld
                     GroundTiles.draw(spriteBatch, new Vector2(pixelPosX, pixelPosY), origin, cell.TileID, cell.color);
                     if (cell.TileEntityID > 0)
                     {
-                        TileEntites.draw(spriteBatch, new Vector2(pixelPosX, pixelPosY), origin, cell.TileEntityID, cell.color);
+                        TileEntites.draw(spriteBatch, new Vector2(pixelPosX, pixelPosY+1), origin, cell.TileEntityID, cell.color);
                     }
-                    //spriteBatch.Draw(GroundTiles.TileSetTexture,
-                    //        new Rectangle(pixelPosX, pixelPosY, GroundTiles.TileWidth, GroundTiles.TileHeight),
-                    //        GroundTiles.getSourceRectangle(cell.TileID),
-                    //        Color.White,0f, origin,SpriteEffects.None,0);
-
 
                     if (debug)
                     {
-                        int Xpos = tilePosX - (int)(PlayerPos.X / TileWidth);
-                        int Ypos = tilePosY- (int)(PlayerPos.Y/TileHeight);
-                        if ((Math.Abs(tilePosX - (int)(PlayerPos.X / TileWidth)) < 5) & (Math.Abs(tilePosY - (int)(PlayerPos.Y / TileHeight)) < 5))
-                        {
 
-                            spriteBatch.DrawString(fontTiny, cell.tilePosition.X + ", " + cell.tilePosition.Y, new Vector2(pixelPosX + 1, pixelPosY), Color.White);
-                            spriteBatch.DrawString(fontTiny, cell.chunkID, new Vector2(pixelPosX + 1, pixelPosY + 10), Color.White);
-                        }
+                        spriteBatch.DrawString(fontTiny, "debug", new Vector2(pixelPosX + 1, pixelPosY), Color.White, 0f, origin, 1f, SpriteEffects.None, Camara.calculateDepth(pixelPosY+10));
+                        //int Xpos = tilePosX - (int)(PlayerPos.X / TileWidth);
+                        //int Ypos = tilePosY- (int)(PlayerPos.Y/TileHeight);
+                        //if ((Math.Abs(tilePosX - (int)(PlayerPos.X / TileWidth)) < 5) & (Math.Abs(tilePosY - (int)(PlayerPos.Y / TileHeight)) < 5))
+                        //{
+
+                        //    spriteBatch.DrawString(fontTiny, cell.tilePosition.X + ", " + cell.tilePosition.Y, new Vector2(pixelPosX + 1, pixelPosY), Color.White);
+                        //    spriteBatch.DrawString(fontTiny, cell.chunkID, new Vector2(pixelPosX + 1, pixelPosY + 10), Color.White);
+                        //}
                     }       
                 }// END X ForLoop
             } // END Y ForLoop

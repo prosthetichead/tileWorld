@@ -71,7 +71,7 @@ namespace tileWorld
         /// <param name="pixelPosition">position in pixels to draw the sprite</param>
         public void Draw(SpriteBatch spriteBatch, Vector2 pixelPosition)
         {
-            Vector2 origin = new Vector2(SpriteWidth/2, SpriteHeight/2);
+            Vector2 origin = new Vector2(SpriteWidth/2, SpriteHeight);
             float rotation = 0f;
 
             int rectangleX = FrameCurrent % (SpriteTextureMap.Width / SpriteWidth);
@@ -80,7 +80,7 @@ namespace tileWorld
             Rectangle sRectangle = new Rectangle(rectangleX * SpriteWidth, rectangleY * SpriteHeight, SpriteWidth, SpriteHeight);
             Rectangle dRectangle = new Rectangle((int)pixelPosition.X, (int)pixelPosition.Y, SpriteWidth, SpriteHeight);
 
-            spriteBatch.Draw(SpriteTextureMap, dRectangle, sRectangle, Color.White, rotation,origin,SpriteEffects.None, 0f);
+            spriteBatch.Draw(SpriteTextureMap, dRectangle, sRectangle, Color.White, rotation, origin,SpriteEffects.None, Camara.calculateDepth(pixelPosition.Y));
             
          //   spriteBatch.Draw(SpriteTexture, pixelPosition, Color.White);
         }

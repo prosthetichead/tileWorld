@@ -135,11 +135,11 @@ namespace tileWorld
             }
             if (input.keyBoardKeyPress(Keys.OemOpenBrackets))
             {
-                Camara.zoom += .001f;
+                Camara.zoom += .01f;
             }
             if (input.keyBoardKeyPress(Keys.OemCloseBrackets))
             {
-                Camara.zoom -= .001f;
+                Camara.zoom -= .01f;
             }
 
             hud.Update(input, npcManager); 
@@ -169,7 +169,7 @@ namespace tileWorld
         {
             GraphicsDevice.Clear(Color.Black);
 
-            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointWrap, null, null, null, Camara.get_transformation(GraphicsDevice));
+            spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.PointWrap, null, null, null, Camara.get_transformation(GraphicsDevice));
             
                 gameWorld.Draw(spriteBatch);
                 player.Draw(spriteBatch);

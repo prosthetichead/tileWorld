@@ -9,6 +9,7 @@ namespace tileWorld
 {
      static class Camara
     {
+         private static int tileHeight = 32; 
          public static Vector2 Location = Vector2.Zero;
          public static int screenResWidth;
          public static int screenResHeight;
@@ -40,5 +41,11 @@ namespace tileWorld
                                          Matrix.CreateTranslation(new Vector3(graphicsDevice.Viewport.Width * 0.5f, graphicsDevice.Viewport.Height * 0.5f, 0));
             return transform;
         }
+
+         public static float calculateDepth(float Y)
+         {
+             int tileNumber = (int)(Y / tileHeight)+1;
+             return (Y+tileHeight) / 10000f;
+         }
     }
 }
