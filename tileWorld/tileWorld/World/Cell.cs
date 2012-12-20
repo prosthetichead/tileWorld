@@ -22,6 +22,7 @@ namespace tileWorld
         public Vector2 pixelPositionCenter;
         public string chunkID = "NA";
         public Color color = Color.White;
+        public int cost = 0;
 
         public Cell(int tileID)
         {

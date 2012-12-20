@@ -215,7 +215,7 @@ namespace tileWorld
                         //System.Console.WriteLine(ChunkRootPosX + ", " + ChunkRootPosY + " " + x + ", " + y);
                         chunkData.ChunkBackGroundLayer[itX, itY].tilePosition = new Vector2(x, y);
                         chunkData.ChunkBackGroundLayer[itX, itY].pixelPosition = new Vector2(x*tileWidth, y*tileHeight);
-                        chunkData.ChunkBackGroundLayer[itX, itY].pixelPositionCenter = new Vector2((x * tileWidth)+(tileWidth/2), (y * tileHeight)+(tileHeight/2));
+                        chunkData.ChunkBackGroundLayer[itX, itY].pixelPositionCenter = new Vector2((x * tileWidth) + (tileWidth / 2), (y * tileHeight) + (tileHeight-5));
                         chunkData.ChunkBackGroundLayer[itX, itY].chunkID = chunkData.ChunkRootPosX + ", " + chunkData.ChunkRootPosY;
 
 

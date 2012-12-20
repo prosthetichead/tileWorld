@@ -50,46 +50,40 @@ namespace tileWorld
                 Cell[] adjacentcells = world.getCellArray(current.mapCell);
                 foreach (Cell cell in adjacentcells)
                 {
-                    if (!cell.Collision & !nodeInList(cell, closedList))
+                    if ((!cell.Collision) & !nodeInList(cell, closedList))
                     {
-                        int distance = (int)Vector2.Distance(cell.tilePosition, endCell.tilePosition);
-                        int g;
-                        if (cell.tilePosition.X != currentCell.tilePosition.X & cell.tilePosition.Y != currentCell.tilePosition.Y)
-                        {
-                            g = 14;
-                        }
-                        else
-                        {
-                            g= 10;
-                        }
+                        //int distance = (int)Vector2.Distance(cell.tilePosition, endCell.tilePosition);
+                        int h = 10 * (int)(Math.Abs(cell.tilePosition.X - endCell.tilePosition.X) + Math.Abs(cell.tilePosition.Y - endCell.tilePosition.Y));
+                        int g = 100;
 
                         if (!nodeInList(cell, openList))
                         {
-                            openList.Add(new PathNode(cell, current, g, distance));
+                            openList.Add(new PathNode(cell, current, g, h));
                         }
                         else
                         {
                             PathNode node = getPathNodeByCell(cell, openList);
-                            node.cost = g + distance;
+                            node.cost = g + h;
                         }
+                        cell.cost = h;
                     }
                 }
 
+
+                int testCost = 100000; 
                 
-                PathNode nextCurrent = openList[0];
-                foreach (PathNode node in openList)
-                {
-                    if (node.cost < nextCurrent.cost)
-                    {
-                        nextCurrent = node;
-                    }
-                }
-
                 openList.Remove(current);
                 closedList.Add(current);
+                
+                foreach (PathNode node in openList)
+                {
+                    if (node.cost <= testCost)
+                    {
+                        current = node;
+                        testCost = node.cost;
+                    }
+                }
 
-
-                current = nextCurrent;
                 if (current.mapCell.tilePosition == endCell.tilePosition | closedList.Count > 1000)
                 {
                     
@@ -102,10 +96,10 @@ namespace tileWorld
             while (current != null)
             {
                 cellPath.Insert(0, current.mapCell);
-                //current.mapCell.color = Color.Red;
+                current.mapCell.color = Color.Red;
                 current = current.parent;
             }
-            
+        
             return cellPath;
         }
 

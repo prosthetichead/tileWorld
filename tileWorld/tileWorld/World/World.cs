@@ -262,15 +262,14 @@ namespace tileWorld
                     if (debug)
                     {
 
-                        spriteBatch.DrawString(fontTiny, "debug", new Vector2(pixelPosX + 1, pixelPosY), Color.White, 0f, origin, 1f, SpriteEffects.None, Camara.calculateDepth(pixelPosY+10));
-                        //int Xpos = tilePosX - (int)(PlayerPos.X / TileWidth);
-                        //int Ypos = tilePosY- (int)(PlayerPos.Y/TileHeight);
-                        //if ((Math.Abs(tilePosX - (int)(PlayerPos.X / TileWidth)) < 5) & (Math.Abs(tilePosY - (int)(PlayerPos.Y / TileHeight)) < 5))
-                        //{
-
-                        //    spriteBatch.DrawString(fontTiny, cell.tilePosition.X + ", " + cell.tilePosition.Y, new Vector2(pixelPosX + 1, pixelPosY), Color.White);
-                        //    spriteBatch.DrawString(fontTiny, cell.chunkID, new Vector2(pixelPosX + 1, pixelPosY + 10), Color.White);
-                        //}
+                       // spriteBatch.DrawString(fontTiny, ""+cell.cost, new Vector2(pixelPosX + 1, pixelPosY), Color.White, 0f, origin, 1f, SpriteEffects.None, Camara.calculateDepth(pixelPosY+10));
+                        int Xpos = tilePosX - (int)(PlayerPos.X / TileWidth);
+                        int Ypos = tilePosY- (int)(PlayerPos.Y/TileHeight);
+                        if ((Math.Abs(tilePosX - (int)(PlayerPos.X / TileWidth)) < 5) & (Math.Abs(tilePosY - (int)(PlayerPos.Y / TileHeight)) < 5))
+                        {
+                            spriteBatch.DrawString(fontTiny, cell.tilePosition.X + ", " + cell.tilePosition.Y, new Vector2(pixelPosX + 1, pixelPosY), Color.White, 0f, origin, 1f, SpriteEffects.None, Camara.calculateDepth(pixelPosY + 10));
+                            spriteBatch.DrawString(fontTiny, cell.chunkID, new Vector2(pixelPosX + 1, pixelPosY + 10), Color.White, 0f, origin, 1f, SpriteEffects.None, Camara.calculateDepth(pixelPosY + 10));
+                       }
                     }       
                 }// END X ForLoop
             } // END Y ForLoop

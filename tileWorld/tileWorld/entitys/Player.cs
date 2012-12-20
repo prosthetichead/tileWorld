@@ -203,9 +203,11 @@ namespace tileWorld
                 {
                     cellPath[0].color = Color.White;
                     cellPath.RemoveAt(0);                    
-                }   
+                }
                 if (cellPath.Count == 0)
+                {
                     CurrentState = state.idle;
+                }
             }
             if (CurrentState == state.idle)
             {

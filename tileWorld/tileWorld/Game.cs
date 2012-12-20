@@ -196,7 +196,7 @@ namespace tileWorld
                 spriteBatch.DrawString(font, "Current time: " + DateTime.Now, new Vector2(30, 65), Color.White);
 
                 spriteBatch.DrawString(font, "player Pos X , Y : " + (int)player.Position.X + " , " + (int)player.Position.Y, new Vector2(30, 75), Color.White);
-                spriteBatch.DrawString(font, "player Tile Pos : " + (int)player.Position.X/TileSizeWidth + " , " + (int)player.Position.Y/TileSizeHeight, new Vector2(30, 85), Color.White);
+                spriteBatch.DrawString(font, "player Tile Pos : " + (int)(player.Position.X/TileSizeWidth) + " , " + (int)(player.Position.Y/TileSizeHeight), new Vector2(30, 85), Color.White);
                 spriteBatch.DrawString(font, "player standing : " + gameWorld.getCell((int)player.Position.X, (int)player.Position.Y).TileID, new Vector2(30, 95), Color.White);
 
 
