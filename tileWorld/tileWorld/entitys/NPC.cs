@@ -57,8 +57,8 @@ namespace tileWorld
 
         private float attackSpeedTimer = 2f;
         private float attackSpeed = 2f;
-        private float baseUpdatePathTime = 2f;
-        private float updatePathTime = 2f;
+        private float baseUpdatePathTime = 1f;
+        private float updatePathTime = 1f;
 
         SpriteFont fontTiny;
 
@@ -129,7 +129,13 @@ namespace tileWorld
             float distanceToPlayer = Vector2.Distance(player.Position, npcData.Position);
             if (distanceToPlayer <= npcData.visiblityRange)
             {
+                updatePathTime -= (float)gameTime.ElapsedGameTime.TotalSeconds;
                 CurrentState = state.walkingToPlayer; //Change State To walking
+                if (updatePathTime <= 0)
+                {
+                    cellPath = pathfinder.FindCellPath(npcData.Position, player.Position);
+                    updatePathTime = baseUpdatePathTime;
+                }
             }
             else
                 CurrentState = state.returnHome;
@@ -143,24 +149,18 @@ namespace tileWorld
 
             if (CurrentState == state.walkingToPlayer)
             {
-                updatePathTime -= (float)gameTime.ElapsedGameTime.TotalSeconds;
-                if (cellPath.Count == 0)
-                {
-                    cellPath = pathfinder.FindCellPath(npcData.Position, player.Position);
-                }
-                else if (updatePathTime <= 0)
-                {
-                    cellPath = pathfinder.FindCellPath(npcData.Position, player.Position);
-                    updatePathTime = baseUpdatePathTime;
-                }
 
-                if (Vector2.Distance(cellPath[0].pixelPositionCenter, npcData.Position) > 1)
+                if (cellPath != null && cellPath.Count != 0)
                 {
-                    npcData.Direction = cellPath[0].pixelPositionCenter - npcData.Position;
-                    npcData.Direction.Normalize();
+
+                    if (Vector2.Distance(cellPath[0].pixelPositionCenter, npcData.Position) > 20)
+                    {
+                        npcData.Direction = cellPath[0].pixelPositionCenter - npcData.Position;
+                        npcData.Direction.Normalize();
+                    }
+                    else
+                        cellPath.RemoveAt(0);
                 }
-                else
-                    cellPath.RemoveAt(0); 
             }
             
             if (CurrentState == state.returnHome)

@@ -219,7 +219,7 @@ namespace tileWorld
                         chunkData.ChunkBackGroundLayer[itX, itY].chunkID = chunkData.ChunkRootPosX + ", " + chunkData.ChunkRootPosY;
 
 
-                        if (r.Next(1, 100) < 20 & !chunkData.ChunkBackGroundLayer[itX, itY].Liquid)
+                        if (r.Next(1, 100) < 2 & !chunkData.ChunkBackGroundLayer[itX, itY].Liquid)
                         {
                             chunkData.ChunkBackGroundLayer[itX, itY].TileEntityID = 2;
                             chunkData.ChunkBackGroundLayer[itX, itY].Collision = true;

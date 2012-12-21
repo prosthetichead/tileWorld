@@ -51,3 +51,22 @@ C:\tileWorld\tileWorld\tileWorld\bin\x86\Debug\tileWorld.exe
 C:\tileWorld\tileWorld\tileWorld\bin\x86\Debug\tileWorld.pdb
 C:\tileWorld\tileWorld\tileWorld\obj\x86\Debug\tileWorld.pdb
 C:\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\HUD\curser.xnb
+C:\gameDev\xna\tileworld\tileWorld\tileWorld\obj\x86\Debug\tileWorld.exe
+C:\gameDev\xna\tileworld\tileWorld\tileWorld\obj\x86\Debug\tileWorld.pdb
+C:\gameDev\xna\tileworld\tileWorld\tileWorld\bin\x86\Debug\Content\tileSets\groundTiles.xnb
+C:\gameDev\xna\tileworld\tileWorld\tileWorld\bin\x86\Debug\Content\player.xnb
+C:\gameDev\xna\tileworld\tileWorld\tileWorld\bin\x86\Debug\Content\debugBG.xnb
+C:\gameDev\xna\tileworld\tileWorld\tileWorld\bin\x86\Debug\Content\HUD\curser.xnb
+C:\gameDev\xna\tileworld\tileWorld\tileWorld\bin\x86\Debug\Content\tileSets\itemTiles.xnb
+C:\gameDev\xna\tileworld\tileWorld\tileWorld\bin\x86\Debug\Content\npc.xnb
+C:\gameDev\xna\tileworld\tileWorld\tileWorld\bin\x86\Debug\Content\tileSets\TileEntites.xnb
+C:\gameDev\xna\tileworld\tileWorld\tileWorld\bin\x86\Debug\Content\HUD\smallPlayerInfoBG.xnb
+C:\gameDev\xna\tileworld\tileWorld\tileWorld\bin\x86\Debug\Content\HUD\largePlayerInfoBG.xnb
+C:\gameDev\xna\tileworld\tileWorld\tileWorld\bin\x86\Debug\Content\Fonts\Font-Segoe-5.xnb
+C:\gameDev\xna\tileworld\tileWorld\tileWorld\bin\x86\Debug\Content\Fonts\Font-PF Arma Five.xnb
+C:\gameDev\xna\tileworld\tileWorld\tileWorld\bin\x86\Debug\Content\Fonts\Font-PF Ronda Seven.xnb
+C:\gameDev\xna\tileworld\tileWorld\tileWorld\bin\x86\Debug\Content\Fonts\Font-8bitoperator JVE.xnb
+C:\gameDev\xna\tileworld\tileWorld\tileWorld\bin\x86\Debug\tileWorld.exe
+C:\gameDev\xna\tileworld\tileWorld\tileWorld\bin\x86\Debug\tileWorld.pdb
+C:\gameDev\xna\tileworld\tileWorld\tileWorld\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\gameDev\xna\tileworld\tileWorld\tileWorld\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt

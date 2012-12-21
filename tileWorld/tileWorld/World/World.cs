@@ -256,7 +256,11 @@ namespace tileWorld
                     GroundTiles.draw(spriteBatch, new Vector2(pixelPosX, pixelPosY), origin, cell.TileID, cell.color);
                     if (cell.TileEntityID > 0)
                     {
-                        TileEntites.draw(spriteBatch, new Vector2(pixelPosX, pixelPosY+1), origin, cell.TileEntityID, cell.color);
+                        if (cell.Collision)
+                        {
+                            cell.color = Color.Red;
+                        }
+                        TileEntites.draw(spriteBatch, new Vector2(pixelPosX + (TileEntites.TileWidth / 2), pixelPosY + (TileEntites.TileHeight - 5)), new Vector2(TileEntites.TileWidth / 2, TileEntites.TileHeight - 5), cell.TileEntityID, cell.color);
                     }
 
                     if (debug)
