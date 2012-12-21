@@ -43,7 +43,7 @@ namespace tileWorld
             Cell endCell = world.getCellFromPixelPos(endPoint);
             PathNode current = new PathNode(currentCell, null, 0, 0);
             openList.Add(current);
-         
+            
             while (true)
             {
                 // get adjacent cells
@@ -84,9 +84,12 @@ namespace tileWorld
                     }
                 }
 
-                if (current.mapCell.tilePosition == endCell.tilePosition | closedList.Count > 1000)
+                if (closedList.Count > 5000)
                 {
-                    
+                    return null;
+                }
+                else if (current.mapCell.tilePosition == endCell.tilePosition )
+                {
                     closedList.Add(current);
                     break;
                 }

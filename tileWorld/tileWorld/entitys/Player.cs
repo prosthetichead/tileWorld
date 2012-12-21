@@ -181,11 +181,17 @@ namespace tileWorld
             {
                 //Find out what was clicked. Empty cell to walk too, or an NPC.
                 System.Console.WriteLine(world.getCellFromPixelPos(MousePosition).Collision);
-                if(npcManager.getNPCatPos(MousePosition) != null)
+                if (npcManager.getNPCatPos(MousePosition) != null) // CLICKED ON NPC 
                     System.Console.WriteLine(npcManager.getNPCatPos(MousePosition).CurrentState);
-                CurrentState = state.walking;
-                cellPath = pathfinder.FindCellPath(Position, MousePosition);
-            }
+                else 
+                {
+                    cellPath = pathfinder.FindCellPath(Position, MousePosition);
+                    if (cellPath != null)
+                        CurrentState = state.walking;
+                    else
+                        CurrentState = state.idle;
+                }
+           }
 
             //is player moving already?
             if (CurrentState == state.walking)
