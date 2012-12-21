@@ -14,7 +14,7 @@ namespace tileWorld
 {
     class Player
     {
-        public enum state { walking, swimming, idle };
+        public enum state { walking, swimming, idle, attacking };
         public state CurrentState = state.idle;
 
         public Vector2 Position = Vector2.Zero;
@@ -166,6 +166,7 @@ namespace tileWorld
             Vector2 MouseDirection = Vector2.Zero;
             double MouseDeg;
             Vector2 MousePosition = Vector2.Zero;
+            NPC npc ;
             
 
             //get mouse location
@@ -179,11 +180,16 @@ namespace tileWorld
 
             if (input.mouseLeftClick())
             {
-                //Find out what was clicked. Empty cell to walk too, or an NPC.
-                System.Console.WriteLine(world.getCellFromPixelPos(MousePosition).Collision);
-                if (npcManager.getNPCatPos(MousePosition) != null) // CLICKED ON NPC 
-                    System.Console.WriteLine(npcManager.getNPCatPos(MousePosition).CurrentState);
-                else 
+                npc = npcManager.getNPCatPos(MousePosition);
+                if (npc != null) // CLICKED ON NPC
+                {
+                    if (Vector2.Distance(Position, npc.getPosition()) <= 20)
+                    {
+                        System.Console.WriteLine("ATTACK");
+                    }
+
+                }
+                else
                 {
                     cellPath = pathfinder.FindCellPath(Position, MousePosition);
                     if (cellPath != null)
@@ -191,7 +197,19 @@ namespace tileWorld
                     else
                         CurrentState = state.idle;
                 }
-           }
+            }
+            else if (input.mouseRightClick())
+            {
+                if (npcManager.getNPCatPos(MousePosition) != null)
+                {
+                    
+                    //check if distance between NPC clicked and player;
+
+                }
+            }
+
+
+
 
             //is player moving already?
             if (CurrentState == state.walking)

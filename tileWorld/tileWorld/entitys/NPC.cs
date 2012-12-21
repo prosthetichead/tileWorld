@@ -18,6 +18,7 @@ namespace tileWorld
         public Vector2 PixelPosition;
         public Vector2 Direction;
 
+
         public string Name;
         public string TextureName;
         
@@ -37,6 +38,8 @@ namespace tileWorld
         public int constitution; // HP. level * con = HP
         public int intelligence; // mana. Int * 10 = Mana
 
+        public int maxHP;
+        public int damage;
      }
 
 
@@ -52,8 +55,10 @@ namespace tileWorld
         public enum state {walkingToPlayer, swimming, idle, returnHome, attacking};
         public state CurrentState = state.idle;
 
-        private float attackSpeedTimer = 2;
-        private float attackSpeed = 2;
+        private float attackSpeedTimer = 2f;
+        private float attackSpeed = 2f;
+        private float baseUpdatePathTime = 2f;
+        private float updatePathTime = 2f;
 
         SpriteFont fontTiny;
 
@@ -121,30 +126,36 @@ namespace tileWorld
 
         public void update(GameTime gameTime, Player player)
         {
-             float distanceToPlayer;
-
-             distanceToPlayer = Vector2.Distance(player.Position, npcData.Position);
-
-             if (distanceToPlayer <= npcData.visiblityRange)
-             {
-                 CurrentState = state.walkingToPlayer; //Change State To walking
-             }
-             else
-                 CurrentState = state.returnHome;
+            float distanceToPlayer = Vector2.Distance(player.Position, npcData.Position);
+            if (distanceToPlayer <= npcData.visiblityRange)
+            {
+                CurrentState = state.walkingToPlayer; //Change State To walking
+            }
+            else
+                CurrentState = state.returnHome;
              
             if (distanceToPlayer <= 20)
-                 CurrentState = state.attacking; 
+                CurrentState = state.attacking; 
+
+
+
 
 
             if (CurrentState == state.walkingToPlayer)
             {
+                updatePathTime -= (float)gameTime.ElapsedGameTime.TotalSeconds;
                 if (cellPath.Count == 0)
                 {
                     cellPath = pathfinder.FindCellPath(npcData.Position, player.Position);
                 }
+                else if (updatePathTime <= 0)
+                {
+                    cellPath = pathfinder.FindCellPath(npcData.Position, player.Position);
+                    updatePathTime = baseUpdatePathTime;
+                }
+
                 if (Vector2.Distance(cellPath[0].pixelPositionCenter, npcData.Position) > 1)
                 {
-
                     npcData.Direction = cellPath[0].pixelPositionCenter - npcData.Position;
                     npcData.Direction.Normalize();
                 }

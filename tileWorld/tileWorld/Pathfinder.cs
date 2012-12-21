@@ -99,10 +99,10 @@ namespace tileWorld
             while (current != null)
             {
                 cellPath.Insert(0, current.mapCell);
-                current.mapCell.color = Color.Red;
+                //current.mapCell.color = Color.Red;
                 current = current.parent;
             }
-        
+            
             return cellPath;
         }
 
