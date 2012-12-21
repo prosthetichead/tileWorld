@@ -1,6 +1,7 @@
 Content\tileSets\groundTiles.xnb
 Content\player.xnb
 Content\debugBG.xnb
+Content\HUD\curser.xnb
 Content\tileSets\itemTiles.xnb
 Content\npc.xnb
 Content\tileSets\TileEntites.xnb
@@ -10,4 +11,3 @@ Content\Fonts\Font-Segoe-5.xnb
 Content\Fonts\Font-PF Arma Five.xnb
 Content\Fonts\Font-PF Ronda Seven.xnb
 Content\Fonts\Font-8bitoperator JVE.xnb
-Content\HUD\curser.xnb
