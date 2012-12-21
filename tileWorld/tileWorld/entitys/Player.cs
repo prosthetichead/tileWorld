@@ -185,7 +185,7 @@ namespace tileWorld
                 {
                     if (Vector2.Distance(Position, npc.getPosition()) <= 20)
                     {
-                        System.Console.WriteLine("ATTACK");
+                        System.Console.WriteLine("ATTACKed");
                     }
 
                 }
