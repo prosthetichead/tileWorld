@@ -91,8 +91,18 @@ namespace tileWorld
             }
             else
                 return false;
-
         }
+
+        public bool mouseLeftRelease()
+        {
+            if (mouseState.LeftButton == ButtonState.Released && previousMouseState.LeftButton == ButtonState.Pressed)
+                return true;
+            else
+            {
+                return false;
+            }
+        }
+
         public bool mouseRightClick()
         {
             if (!used & IsMouseInsideWindow())

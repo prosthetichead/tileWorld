@@ -14,8 +14,10 @@ namespace tileWorld
 {
     class Player
     {
-        public enum state { walkingToPoint, walking, swimming, idle, attacking };
-        public state CurrentState = state.idle;
+        public enum State {movingToPoint, freeMoving, idle, attacking};
+        public enum AniState { walk, swim, attack, idle }
+        public State state = State.idle;
+        public AniState aniState = AniState.idle; 
 
         public Vector2 Position = Vector2.Zero;
         public Vector2 PixelPosition = Vector2.Zero;
@@ -54,10 +56,6 @@ namespace tileWorld
             return maxHP - playerDamage;
         }
 
-
-
-
-
         private void updateAnimation(double FacingDeg, GameTime gameTime)
         {
             int animationFirstFrameNumber = 0;
@@ -67,15 +65,13 @@ namespace tileWorld
 
             if (FacingDeg >= 135 | FacingDeg <= -135) //Facing Up.
             {
-                switch(CurrentState)
+                switch(aniState)
                 {
-                    case state.walkingToPoint:
-                        goto case state.walking;
-                    case state.walking:
+                    case AniState.walk:
                         animationFirstFrameNumber = 0;
                         animationLastFrameNumber = 3;
                         break;
-                    case state.idle:
+                    case AniState.idle:
                         animationFirstFrameNumber = 0;
                         animationLastFrameNumber = 0;
                         break;
@@ -87,15 +83,13 @@ namespace tileWorld
             }
             else if (FacingDeg >= -45 & FacingDeg <= 45) //Facing Down.
             {
-                switch (CurrentState)
+                switch (aniState)
                 {
-                    case state.walkingToPoint:
-                        goto case state.walking;
-                    case state.walking:
+                    case AniState.walk:
                         animationFirstFrameNumber = 8;
                         animationLastFrameNumber = 11;
                         break;
-                    case state.idle:
+                    case AniState.idle:
                         animationFirstFrameNumber = 9;
                         animationLastFrameNumber = 9;
                         break;
@@ -107,15 +101,13 @@ namespace tileWorld
             }
             else if (FacingDeg >= -135 & FacingDeg <= -45) //Facing Left.
             {
-                switch (CurrentState)
+                switch (aniState)
                 {
-                    case state.walkingToPoint:
-                        goto case state.walking;
-                    case state.walking:
+                    case AniState.walk:
                         animationFirstFrameNumber = 12;
                         animationLastFrameNumber = 15;
                         break;
-                    case state.idle:
+                    case AniState.idle:
                         animationFirstFrameNumber = 12;
                         animationLastFrameNumber = 12;
                         break;
@@ -127,15 +119,13 @@ namespace tileWorld
             }
             else if (FacingDeg <= 135 & FacingDeg >= 45) //Facing Right.
             {
-                switch (CurrentState)
+                switch (aniState)
                 {
-                    case state.walking:
+                    case AniState.walk:
                         animationFirstFrameNumber = 4;
                         animationLastFrameNumber = 7;
                         break;
-                    case state.walkingToPoint:
-                        goto case state.walking;
-                    case state.idle:
+                    case AniState.idle: 
                         animationFirstFrameNumber = 4;
                         animationLastFrameNumber = 4;
                         break;
@@ -186,18 +176,19 @@ namespace tileWorld
             MouseDeg = Math.Atan2(MouseDirection.X, MouseDirection.Y);
             MouseDeg = MouseDeg * 180 / Math.PI;
 
+
             if (input.mouseLeftHold())
             {
-                CurrentState = state.walking;
+                state = State.freeMoving;
             }
-
-            if (input.mouseLeftClick())
+            else if (input.mouseLeftClick())
             {
                 npc = npcManager.getNPCatPos(MousePosition);
                 if (npc != null) // CLICKED ON NPC
                 {
                     if (Vector2.Distance(Position, npc.getPosition()) <= 20)
                     {
+                        state = State.attacking;
                         System.Console.WriteLine("ATTACKed");
                     }
 
@@ -206,29 +197,32 @@ namespace tileWorld
                 {
                     cellPath = pathfinder.FindCellPath(Position, MousePosition);
                     if (cellPath != null)
-                        CurrentState = state.walkingToPoint;
+                        state = State.movingToPoint;
                     else
-                        CurrentState = state.idle;
+                        state = State.idle;
                 }
             }
-
-
-
+            else if (input.mouseLeftRelease() && state != State.movingToPoint)
+            {
+                state = State.idle;
+            }
             else if (input.mouseRightClick())
             {
                 if (npcManager.getNPCatPos(MousePosition) != null)
                 {
-                    
+
                     //check if distance between NPC clicked and player;
 
                 }
             }
 
-
-
-
-            //is player moving already?
-            if (CurrentState == state.walkingToPoint)
+            if (state == State.freeMoving)
+            {
+                Direction = MouseDirection;
+                FacingDeg = MouseDeg;
+                Position += Direction * (float)gameTime.ElapsedGameTime.TotalSeconds * speed;
+            }
+            else if (state == State.movingToPoint)
             {
                 MoveToPos = cellPath[0].pixelPositionCenter;
                 if (Vector2.Distance(Position, MoveToPos) > 1)
@@ -246,10 +240,10 @@ namespace tileWorld
                 }
                 if (cellPath.Count == 0)
                 {
-                    CurrentState = state.idle;
+                    state = State.idle;
                 }
             }
-            if (CurrentState == state.idle)
+            else if (state == State.idle)
             {
                 FacingDeg = MouseDeg;
             }
