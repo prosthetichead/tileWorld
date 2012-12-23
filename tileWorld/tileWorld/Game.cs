@@ -120,7 +120,7 @@ namespace tileWorld
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            input.Update();
+            input.Update(gameTime);
             KeyboardState keyState = Keyboard.GetState();
          
             if (input.keyBoardKeyPress(Keys.F3)) // Turn on Debug Modes 
@@ -131,7 +131,7 @@ namespace tileWorld
 
             if (input.keyBoardKeyPress(Keys.Q) & debugMode)
             {
-                npcManager.GenNPC_atPos(player.Position);
+                npcManager.GenNPC_atPos(input.mousePos() + Camara.Location);
             }
             if (input.keyBoardKeyPress(Keys.OemOpenBrackets))
             {

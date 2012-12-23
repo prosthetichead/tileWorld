@@ -54,7 +54,7 @@ namespace tileWorld
                     {
                         //int distance = (int)Vector2.Distance(cell.tilePosition, endCell.tilePosition);
                         int h = 10 * (int)(Math.Abs(cell.tilePosition.X - endCell.tilePosition.X) + Math.Abs(cell.tilePosition.Y - endCell.tilePosition.Y));
-                        int g = 100;
+                        int g = 10;
 
                         if (!nodeInList(cell, openList))
                         {

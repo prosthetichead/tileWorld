@@ -89,9 +89,10 @@ namespace tileWorld
             CellArray[1] = getCell(X - 1, Y);
             CellArray[2] = getCell(X, Y + 1);
             CellArray[3] = getCell(X, Y - 1);
-           // CellArray[4] = getCell(X + 1, Y + 1);
+           
+          //  CellArray[4] = getCell(X + 1, Y + 1);
            // CellArray[5] = getCell(X - 1, Y - 1);
-           // CellArray[6] = getCell(X + 1, Y - 1);
+            //CellArray[6] = getCell(X + 1, Y - 1);
            // CellArray[7] = getCell(X - 1, Y + 1);
 
             return CellArray;
@@ -256,10 +257,6 @@ namespace tileWorld
                     GroundTiles.draw(spriteBatch, new Vector2(pixelPosX, pixelPosY), origin, cell.TileID, cell.color);
                     if (cell.TileEntityID > 0)
                     {
-                        if (cell.Collision)
-                        {
-                            cell.color = Color.Red;
-                        }
                         TileEntites.draw(spriteBatch, new Vector2(pixelPosX + (TileEntites.TileWidth / 2), pixelPosY + (TileEntites.TileHeight - 5)), new Vector2(TileEntites.TileWidth / 2, TileEntites.TileHeight - 5), cell.TileEntityID, cell.color);
                     }
 

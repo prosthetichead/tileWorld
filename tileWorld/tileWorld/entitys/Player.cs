@@ -14,7 +14,7 @@ namespace tileWorld
 {
     class Player
     {
-        public enum state { walking, swimming, idle, attacking };
+        public enum state { walkingToPoint, walking, swimming, idle, attacking };
         public state CurrentState = state.idle;
 
         public Vector2 Position = Vector2.Zero;
@@ -69,6 +69,8 @@ namespace tileWorld
             {
                 switch(CurrentState)
                 {
+                    case state.walkingToPoint:
+                        goto case state.walking;
                     case state.walking:
                         animationFirstFrameNumber = 0;
                         animationLastFrameNumber = 3;
@@ -87,6 +89,8 @@ namespace tileWorld
             {
                 switch (CurrentState)
                 {
+                    case state.walkingToPoint:
+                        goto case state.walking;
                     case state.walking:
                         animationFirstFrameNumber = 8;
                         animationLastFrameNumber = 11;
@@ -105,6 +109,8 @@ namespace tileWorld
             {
                 switch (CurrentState)
                 {
+                    case state.walkingToPoint:
+                        goto case state.walking;
                     case state.walking:
                         animationFirstFrameNumber = 12;
                         animationLastFrameNumber = 15;
@@ -127,6 +133,8 @@ namespace tileWorld
                         animationFirstFrameNumber = 4;
                         animationLastFrameNumber = 7;
                         break;
+                    case state.walkingToPoint:
+                        goto case state.walking;
                     case state.idle:
                         animationFirstFrameNumber = 4;
                         animationLastFrameNumber = 4;
@@ -178,6 +186,11 @@ namespace tileWorld
             MouseDeg = Math.Atan2(MouseDirection.X, MouseDirection.Y);
             MouseDeg = MouseDeg * 180 / Math.PI;
 
+            if (input.mouseLeftHold())
+            {
+                CurrentState = state.walking;
+            }
+
             if (input.mouseLeftClick())
             {
                 npc = npcManager.getNPCatPos(MousePosition);
@@ -193,11 +206,14 @@ namespace tileWorld
                 {
                     cellPath = pathfinder.FindCellPath(Position, MousePosition);
                     if (cellPath != null)
-                        CurrentState = state.walking;
+                        CurrentState = state.walkingToPoint;
                     else
                         CurrentState = state.idle;
                 }
             }
+
+
+
             else if (input.mouseRightClick())
             {
                 if (npcManager.getNPCatPos(MousePosition) != null)
@@ -212,7 +228,7 @@ namespace tileWorld
 
 
             //is player moving already?
-            if (CurrentState == state.walking)
+            if (CurrentState == state.walkingToPoint)
             {
                 MoveToPos = cellPath[0].pixelPositionCenter;
                 if (Vector2.Distance(Position, MoveToPos) > 1)
@@ -237,7 +253,6 @@ namespace tileWorld
             {
                 FacingDeg = MouseDeg;
             }
-
 
             updateAnimation(FacingDeg, gameTime);
         }

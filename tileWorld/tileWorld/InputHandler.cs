@@ -16,6 +16,8 @@ namespace tileWorld
 
         public bool used = false;
 
+        public float holdTimer = 0;
+
         Game game;
         
 
@@ -28,7 +30,7 @@ namespace tileWorld
             keyState = Keyboard.GetState();
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
              // New Tick (this bool makes sure an input isnt used twice.)
             if (game.IsActive)
@@ -38,6 +40,14 @@ namespace tileWorld
 
                 previousKeyState = keyState;
                 keyState = Keyboard.GetState();
+
+                if (mouseState.LeftButton == ButtonState.Pressed)
+                {
+                    holdTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                }
+                else if(mouseState.LeftButton == ButtonState.Released)
+                    holdTimer = 0f;
+
             }
             used = false;
         }
@@ -50,6 +60,23 @@ namespace tileWorld
         {
             return new Vector2(mouseState.X, mouseState.Y);
         }
+
+        public bool mouseLeftHold()
+        {
+            if (!used & IsMouseInsideWindow())
+            {
+                if (mouseState.LeftButton == ButtonState.Pressed && holdTimer > .5f)
+                {
+                    used = true;
+                    return true;
+                }
+                else
+                    return false;
+            }
+            else
+                return false;
+        }
+
         public bool mouseLeftClick()
         {
             if (!used & IsMouseInsideWindow())
