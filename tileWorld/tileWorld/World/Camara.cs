@@ -45,7 +45,7 @@ namespace tileWorld
          public static float calculateDepth(float Y)
          {
              int tileNumber = (int)(Y / tileHeight)+1;
-             return (Y+tileHeight) / 10000f;
+             return (Y+tileHeight) / 1000f;
          }
     }
 }

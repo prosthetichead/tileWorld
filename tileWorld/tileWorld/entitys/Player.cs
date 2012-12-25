@@ -14,11 +14,9 @@ namespace tileWorld
 {
     class Player
     {
-        public enum State {movingToPoint, freeMoving, idle, attacking};
-        public enum AniState { walk, swim, attack, idle }
+        public enum State {movingToPoint, freeMoving, idle, meleeAttack};
         public State state = State.idle;
-        public AniState aniState = AniState.idle; 
-
+      
         public Vector2 Position = Vector2.Zero;
         public Vector2 PixelPosition = Vector2.Zero;
         public Vector2 Direction = Vector2.Zero;
@@ -36,6 +34,7 @@ namespace tileWorld
         private float maxHP = 100;
 
         AnimatedSprite playerSprite;
+        AnimatedSprite playerMeleeAttackSprite;
         World world;
         Pathfinder pathfinder;
         SpriteFont damageFont;
@@ -46,6 +45,9 @@ namespace tileWorld
         public Player(ContentManager Content, World world)
         {
             playerSprite = new AnimatedSprite(Content, "player", playerSizeWidth, playerSizeHeight);
+            playerMeleeAttackSprite = new AnimatedSprite(Content, "player", playerSizeWidth*2, playerSizeHeight*2, new Vector2(playerSizeWidth, playerSizeHeight + (playerSizeHeight/2)));
+            
+            
             this.world = world;
             pathfinder = new Pathfinder(world);
             damageFont = Content.Load<SpriteFont>(@"Fonts/Font-8bitoperator JVE");
@@ -58,86 +60,101 @@ namespace tileWorld
 
         private void updateAnimation(double FacingDeg, GameTime gameTime)
         {
-            int animationFirstFrameNumber = 0;
-            int animationLastFrameNumber = 3;
+            int animationFirstFrameNumber=0;
+            int animationLastFrameNumber=0;
             int animationSpeed_Millisecs = 90;
 
 
             if (FacingDeg >= 135 | FacingDeg <= -135) //Facing Up.
             {
-                switch(aniState)
+                switch(state)
                 {
-                    case AniState.walk:
+                    case State.meleeAttack:
+                        animationFirstFrameNumber = 10;
+                        animationLastFrameNumber = 12;
+                        break;
+                    case State.movingToPoint:
                         animationFirstFrameNumber = 0;
                         animationLastFrameNumber = 3;
                         break;
-                    case AniState.idle:
-                        animationFirstFrameNumber = 0;
-                        animationLastFrameNumber = 0;
-                        break;
+                    case State.freeMoving:
+                        goto case State.movingToPoint;
                     default:
-                        animationFirstFrameNumber = 0;
-                        animationLastFrameNumber = 0;
+                        animationFirstFrameNumber = 1;
+                        animationLastFrameNumber = 1;
                         break;
                 }
             }
             else if (FacingDeg >= -45 & FacingDeg <= 45) //Facing Down.
             {
-                switch (aniState)
+                switch (state)
                 {
-                    case AniState.walk:
-                        animationFirstFrameNumber = 8;
-                        animationLastFrameNumber = 11;
+                    case State.meleeAttack:
+                        animationFirstFrameNumber = 20;
+                        animationLastFrameNumber = 22;
                         break;
-                    case AniState.idle:
-                        animationFirstFrameNumber = 9;
-                        animationLastFrameNumber = 9;
+                    case State.movingToPoint:
+                        animationFirstFrameNumber = 20;
+                        animationLastFrameNumber = 23;
                         break;
+                    case State.freeMoving:
+                        goto case State.movingToPoint;
                     default:
-                        animationFirstFrameNumber = 9;
-                        animationLastFrameNumber = 9;
+                        animationFirstFrameNumber = 21;
+                        animationLastFrameNumber = 21;
                         break;
                 }
             }
             else if (FacingDeg >= -135 & FacingDeg <= -45) //Facing Left.
             {
-                switch (aniState)
+                switch (state)
                 {
-                    case AniState.walk:
-                        animationFirstFrameNumber = 12;
-                        animationLastFrameNumber = 15;
+                    case State.meleeAttack:
+                        animationFirstFrameNumber = 25;
+                        animationLastFrameNumber = 27;
                         break;
-                    case AniState.idle:
-                        animationFirstFrameNumber = 12;
-                        animationLastFrameNumber = 12;
+                    case State.movingToPoint:
+                        animationFirstFrameNumber = 30;
+                        animationLastFrameNumber = 33;
                         break;
+                    case State.freeMoving:
+                        goto case State.movingToPoint;
                     default:
-                        animationFirstFrameNumber = 12;
-                        animationLastFrameNumber = 12;
+                        animationFirstFrameNumber = 31;
+                        animationLastFrameNumber = 31;
                         break;
                 }
             }
             else if (FacingDeg <= 135 & FacingDeg >= 45) //Facing Right.
             {
-                switch (aniState)
+                switch (state)
                 {
-                    case AniState.walk:
-                        animationFirstFrameNumber = 4;
-                        animationLastFrameNumber = 7;
+                    case State.meleeAttack:
+                        animationFirstFrameNumber = 15;
+                        animationLastFrameNumber = 17;
                         break;
-                    case AniState.idle: 
-                        animationFirstFrameNumber = 4;
-                        animationLastFrameNumber = 4;
+                    case State.movingToPoint:
+                        animationFirstFrameNumber = 10;
+                        animationLastFrameNumber = 13;
                         break;
+                    case State.freeMoving:
+                        goto case State.movingToPoint;
                     default:
-                        animationFirstFrameNumber = 4;
-                        animationLastFrameNumber = 4;
+                        animationFirstFrameNumber = 11;
+                        animationLastFrameNumber = 11;
                         break;
                 }
             }
 
-            playerSprite.setAnimation(animationFirstFrameNumber, animationLastFrameNumber, animationSpeed_Millisecs);
-            playerSprite.nextFrame(gameTime);
+
+            if (state == State.meleeAttack)
+            {
+                playerMeleeAttackSprite.setAnimation(animationFirstFrameNumber, animationLastFrameNumber, animationSpeed_Millisecs);
+                playerMeleeAttackSprite.nextFrame(gameTime);
+            }
+            else
+                playerSprite.setAnimation(animationFirstFrameNumber, animationLastFrameNumber, animationSpeed_Millisecs);
+                playerSprite.nextFrame(gameTime);
         }
 
         public bool attacked(int attackRoll)
@@ -188,7 +205,7 @@ namespace tileWorld
                 {
                     if (Vector2.Distance(Position, npc.getPosition()) <= 20)
                     {
-                        state = State.attacking;
+                        state = State.meleeAttack;
                         System.Console.WriteLine("ATTACKed");
                     }
 
@@ -202,19 +219,20 @@ namespace tileWorld
                         state = State.idle;
                 }
             }
-            else if (input.mouseLeftRelease() && state != State.movingToPoint)
+            else if (input.mouseRightClick())
+            {
+                //if (npcManager.getNPCatPos(MousePosition) != null)
+                //{
+                    state = State.meleeAttack;
+                    System.Console.WriteLine("ATTACKed");
+
+                //}
+            }
+            else if (input.mouseLeftRelease() && state == State.freeMoving)
             {
                 state = State.idle;
             }
-            else if (input.mouseRightClick())
-            {
-                if (npcManager.getNPCatPos(MousePosition) != null)
-                {
 
-                    //check if distance between NPC clicked and player;
-
-                }
-            }
 
             if (state == State.freeMoving)
             {
@@ -249,6 +267,7 @@ namespace tileWorld
             }
 
             updateAnimation(FacingDeg, gameTime);
+            System.Console.WriteLine(state);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -257,8 +276,10 @@ namespace tileWorld
            PixelPosition.Y = Camara.screenResHeight / 2;
 
  
-
-           playerSprite.Draw(spriteBatch, PixelPosition);
+            if(state == State.meleeAttack)
+                playerMeleeAttackSprite.Draw(spriteBatch, PixelPosition);
+            else
+                playerSprite.Draw(spriteBatch, PixelPosition);
         }
 
     }

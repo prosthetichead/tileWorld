@@ -40,5 +40,12 @@ namespace tileWorld
                     color, 0f, origin, SpriteEffects.None, Camara.calculateDepth(position.Y));
         }
 
+        public void draw(SpriteBatch spriteBatch, Vector2 position, Vector2 origin, int tileID, Color color, float Depth)
+        {
+            spriteBatch.Draw(TileSetTexture,
+                    new Rectangle((int)position.X, (int)position.Y, TileWidth, TileHeight),
+                    getSourceRectangle(tileID),
+                    color, 0f, origin, SpriteEffects.None, Depth);
+        }
     }
 }

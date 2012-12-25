@@ -18,6 +18,8 @@ namespace tileWorld
         private int FrameNumberFirst = 0;
         private int FrameNumberLast  = 0;
         private int FrameCurrent = 0;
+
+        Vector2 origin;
        
         private int elapsedTime = 0; //times since Last frame change
         private int FrameTime = 1; // how often to change frames in milliseconds
@@ -31,8 +33,15 @@ namespace tileWorld
             SpriteWidth = spriteWidth;
             SpriteHeight = spriteHeight;
             SpriteTextureMap = Content.Load<Texture2D>(theAssetName);
-             
+            origin = new Vector2(SpriteWidth / 2, SpriteHeight);
+        }
 
+        public AnimatedSprite(ContentManager Content, string theAssetName, int spriteWidth, int spriteHeight, Vector2 origin)
+        {
+            SpriteWidth = spriteWidth;
+            SpriteHeight = spriteHeight;
+            SpriteTextureMap = Content.Load<Texture2D>(theAssetName);
+            this.origin = origin;
         }
 
 
@@ -71,7 +80,6 @@ namespace tileWorld
         /// <param name="pixelPosition">position in pixels to draw the sprite</param>
         public void Draw(SpriteBatch spriteBatch, Vector2 pixelPosition)
         {
-            Vector2 origin = new Vector2(SpriteWidth/2, SpriteHeight);
             float rotation = 0f;
 
             int rectangleX = FrameCurrent % (SpriteTextureMap.Width / SpriteWidth);
