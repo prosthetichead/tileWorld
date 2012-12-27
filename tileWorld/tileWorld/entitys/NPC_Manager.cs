@@ -44,7 +44,7 @@ namespace tileWorld
             List<NPC> npcList = new List<NPC>();
             foreach (NPC npc in NPCs)
             {
-                if (npc.testBoundingBoxColision(area))
+                if (npc.BoundingBox.Intersects(area))
                 {
                     npcList.Add(npc);
                 }

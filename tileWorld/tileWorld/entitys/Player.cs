@@ -26,6 +26,7 @@ namespace tileWorld
         private float attackTimer = .5f;
         private float attackTimerBase = .5f;
         private double FacingDeg = 0;
+        private Rectangle attackArea;
 
         private List<Cell> cellPath;
         
@@ -286,17 +287,25 @@ namespace tileWorld
 
         private void meleeAttack(double FacingDeg, NPC_Manager npcManager)
         {
-            Rectangle attackArea;
+            
             List<NPC> npcList;
-            //workout box attack area
-            attackArea = new Rectangle((int)Position.X, (int)Position.Y, Width, Height);
-            //check What is in the box attack area
+            if (FacingDeg >= 135 | FacingDeg <= -135) // Facing up
+                attackArea = new Rectangle((int)PixelPosition.X - Width, (int)PixelPosition.Y - ((Height / 2) + Height - 5), Width + Width, Height - (Height / 4));
+            else if (FacingDeg >= -45 & FacingDeg <= 45) // facing down
+                attackArea = new Rectangle((int)PixelPosition.X - Width, (int)PixelPosition.Y - (Height / 2) + 5, Width + Width, Height - (Height / 4));
+            else if (FacingDeg >= -135 & FacingDeg <= -45) //Facing Left.
+                attackArea = new Rectangle((int)PixelPosition.X - (Width / 2 + Width / 4), (int)PixelPosition.Y - ((Height / 4) + Height + 5), Width - (Width / 4), Height + Height);
+            else if (FacingDeg <= 135 & FacingDeg >= 45) // facing right
+                attackArea = new Rectangle((int)PixelPosition.X, (int)PixelPosition.Y - ((Height / 4) + Height + 5), Width - (Width / 4), Height + Height);
+            else
+                attackArea = new Rectangle((int)PixelPosition.X, (int)PixelPosition.Y, Width, Height);
+
             npcList = npcManager.getNPCsInBox(attackArea);
             foreach (NPC npc in npcList)
             {
                 npc.attacked(5);
+                System.Console.WriteLine(npc);
             }
-            //damage what is in the box attack area
 
         }
 
@@ -305,7 +314,7 @@ namespace tileWorld
             PixelPosition.X = Camara.screenResWidth / 2;
             PixelPosition.Y = Camara.screenResHeight / 2;
 
-            spriteBatch.Draw(debugRec, new Rectangle((int)PixelPosition.X - Width, (int)PixelPosition.Y - (Height / 2) + 5, Width + Width, Height - (Height / 4)), null, Color.Tomato, 0f, Vector2.Zero, SpriteEffects.None, 1f);
+            spriteBatch.Draw(debugRec, attackArea, null, Color.Tomato, 0f, Vector2.Zero, SpriteEffects.None, 1f);
 
             if(state == State.meleeAttack)
                 playerMeleeAttackSprite.Draw(spriteBatch, PixelPosition);

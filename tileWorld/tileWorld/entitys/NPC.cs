@@ -61,6 +61,7 @@ namespace tileWorld
         private float updatePathTime = 1f;
 
         SpriteFont fontTiny;
+        Texture2D debugRec;
 
         /// <summary>
         /// defualt constructer
@@ -88,6 +89,8 @@ namespace tileWorld
             fontTiny = Content.Load<SpriteFont>(@"Fonts/Font-PF Arma Five");
             pathfinder = new Pathfinder(world);
             cellPath = new List<Cell>();
+
+            debugRec = Content.Load<Texture2D>(@"debugRec");
         }
         public NPC(ContentManager Content, NPCData npcData)
         {
@@ -133,20 +136,9 @@ namespace tileWorld
         {
             get
             {
-                return new Rectangle((int)npcData.Position.X - (npcData.NpcWidth / 2), (int)npcData.Position.Y - (npcData.NpcHeight / 2), npcData.NpcWidth, npcData.NpcHeight);
+                return new Rectangle((int)npcData.PixelPosition.X - npcData.NpcWidth/2, (int)npcData.PixelPosition.Y - npcData.NpcHeight, npcData.NpcWidth, npcData.NpcHeight);
             }
         }
-
-        public bool testBoundingBoxColision(Rectangle rectangle)
-        {
-            if (rectangle.Intersects(this.BoundingBox))
-            {
-                return true;
-            }
-            else
-                return false;
-        }
-
 
         public void update(GameTime gameTime, Player player)
         {
@@ -237,10 +229,9 @@ namespace tileWorld
             npcData.PixelPosition -= Camara.Location;
             //System.Console.WriteLine("X, Y " + PixelPosition.X + "," + PixelPosition.Y);
 
-            NpcSprite.Draw(spriteBatch, npcData.PixelPosition);
-            spriteBatch.DrawString(fontTiny, CurrentState.ToString(), new Vector2(npcData.PixelPosition.X + 2, npcData.PixelPosition.Y - 29), Color.Black);
-            spriteBatch.DrawString(fontTiny, CurrentState.ToString(), new Vector2(npcData.PixelPosition.X, npcData.PixelPosition.Y - 30), Color.White);
+            spriteBatch.Draw(debugRec, BoundingBox, null, Color.Tomato, 0f, Vector2.Zero, SpriteEffects.None, 1f);
 
+            NpcSprite.Draw(spriteBatch, npcData.PixelPosition);
         }
     }
 }
