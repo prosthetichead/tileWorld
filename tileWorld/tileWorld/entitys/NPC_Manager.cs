@@ -39,19 +39,28 @@ namespace tileWorld
             return null;
         }
 
-        public void update(GameTime gameTime, Player player)
+        public List<NPC> getNPCsInBox(Rectangle area)
         {
+            List<NPC> npcList = new List<NPC>();
             foreach (NPC npc in NPCs)
             {
-                npc.update(gameTime, player);
-                foreach (NPC checkNpc in NPCs)
+                if (npc.testBoundingBoxColision(area))
                 {
-                    if (checkNpc != npc) //dont check yourself!
-                    {
-                        npc.testBoundingBoxColision(checkNpc.BoundingBox);
-                    }
+                    npcList.Add(npc);
                 }
+            }
+            return npcList;
+        }
 
+        public void update(GameTime gameTime, Player player)
+        {
+            NPC npc;
+            for (int i = 0; i < NPCs.Count; i++)
+            {
+                npc = NPCs[i];
+                npc.update(gameTime, player);
+                if (npc.dead)
+                    NPCs.Remove(npc);
             }
         }
 

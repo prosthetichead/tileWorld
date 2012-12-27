@@ -118,16 +118,25 @@
       <Output>C:\tileworld\tileWorld\tileWorld\bin\x86\Debug\Content\Fonts\Font-8bitoperator JVE.xnb</Output>
       <Time>2012-12-23T16:10:35.5851312+10:30</Time>
     </Item>
+    <Item>
+      <Source>debugRec.png</Source>
+      <Name>debugRec</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\debugRec.xnb</Output>
+      <Time>2012-12-27T10:25:28.0864723+10:30</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\tileworld\tileWorld\tileWorldContent\</RootDirectory>
-      <LoggerRootDirectory>C:\tileworld\tileWorld\tileWorld\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\tileworld\tileWorld\tileWorldContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\tileworld\tileWorld\tileWorld\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\tileWorld\tileWorld\tileWorldContent\</RootDirectory>
+      <LoggerRootDirectory>C:\tileWorld\tileWorld\tileWorld\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\tileWorld\tileWorld\tileWorldContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>

@@ -49,11 +49,11 @@ namespace tileWorld
         public AnimatedSprite NpcSprite;
         private Pathfinder pathfinder;
         private List<Cell> cellPath;
-        private Vector2 LastPlayerPos;
-        private Vector2 WalkToPos;
         
         public enum state {walkingToPlayer, swimming, idle, returnHome, attacking};
         public state CurrentState = state.idle;
+
+        public bool dead = false;
 
         private float attackSpeedTimer = 2f;
         private float attackSpeed = 2f;
@@ -80,7 +80,9 @@ namespace tileWorld
             npcData.PixelPosition = npcData.Position * 32;
             npcData.visiblityRange = 300;
             npcData.speed = 20;
-            npcData.Direction.X = 1; 
+            npcData.Direction.X = 1;
+
+            npcData.maxHP = 10;
 
             NpcSprite = new AnimatedSprite(Content, textureName, npcHeight, npcWidth);
             fontTiny = Content.Load<SpriteFont>(@"Fonts/Font-PF Arma Five");
@@ -104,8 +106,29 @@ namespace tileWorld
             return npcData.Position;
         }
 
-        
+        public float HP()
+        {
+            return npcData.maxHP - npcData.damage;
+        }
+        public bool attacked(int attackRoll)
+        {
+            Random roll = new Random((int)DateTime.Now.Ticks);
+            int Defend = roll.Next(1, 8);
+            int damageTaken = Math.Max(attackRoll - Defend, 0);
+            npcData.damage = damageTaken + npcData.damage;
 
+            if (damageTaken > 0)
+            {
+                MessageSystem.Instance.Show("" + damageTaken, new Vector2(npcData.PixelPosition.X, npcData.PixelPosition.Y - 5),1f, fontTiny, 1, Color.Cyan);
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        
         public Rectangle BoundingBox
         {
             get
@@ -114,19 +137,24 @@ namespace tileWorld
             }
         }
 
-        public void testBoundingBoxColision(Rectangle rectangle)
+        public bool testBoundingBoxColision(Rectangle rectangle)
         {
             if (rectangle.Intersects(this.BoundingBox))
             {
-                //System.Console.WriteLine("INTERSECTS");
-                //npcData.Direction =
+                return true;
             }
+            else
+                return false;
         }
 
 
         public void update(GameTime gameTime, Player player)
         {
             float distanceToPlayer = Vector2.Distance(player.Position, npcData.Position);
+
+            if (HP() <= 0)
+                dead = true;
+
             if (distanceToPlayer <= npcData.visiblityRange)
             {
                 updatePathTime -= (float)gameTime.ElapsedGameTime.TotalSeconds;

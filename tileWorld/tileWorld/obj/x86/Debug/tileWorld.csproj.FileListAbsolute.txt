@@ -70,3 +70,4 @@ C:\gameDev\xna\tileworld\tileWorld\tileWorld\bin\x86\Debug\tileWorld.exe
 C:\gameDev\xna\tileworld\tileWorld\tileWorld\bin\x86\Debug\tileWorld.pdb
 C:\gameDev\xna\tileworld\tileWorld\tileWorld\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\gameDev\xna\tileworld\tileWorld\tileWorld\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\tileWorld\tileWorld\tileWorld\bin\x86\Debug\Content\debugRec.xnb
