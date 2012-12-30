@@ -314,7 +314,7 @@ namespace tileWorld
             PixelPosition.X = Camara.screenResWidth / 2;
             PixelPosition.Y = Camara.screenResHeight / 2;
 
-            spriteBatch.Draw(debugRec, attackArea, null, Color.Tomato, 0f, Vector2.Zero, SpriteEffects.None, 1f);
+           // spriteBatch.Draw(debugRec, attackArea, null, Color.Tomato, 0f, Vector2.Zero, SpriteEffects.None, 1f);
 
             if(state == State.meleeAttack)
                 playerMeleeAttackSprite.Draw(spriteBatch, PixelPosition);

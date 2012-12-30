@@ -61,8 +61,9 @@ public class MessageSystem {
         foreach(Message M in Messages)
         {
             color = M.Colour;
-            batch.DrawString(M.Font, M.Data, new Vector2(M.Pos.X + 1, M.Pos.Y + 1), Color.Black,M.Rotation,M.Origin,M.Scale,SpriteEffects.None,1f);
-            batch.DrawString(M.Font, M.Data, M.Pos, color,M.Rotation,M.Origin,M.Scale,SpriteEffects.None,1f);
+             batch.DrawString(M.Font, M.Data, M.Pos, color,M.Rotation,M.Origin,M.Scale,SpriteEffects.None,1f);
+             batch.DrawString(M.Font, M.Data, new Vector2(M.Pos.X + 1, M.Pos.Y + 1), Color.Black, M.Rotation, M.Origin, M.Scale, SpriteEffects.None, .9f);
+           
         }
        
     }

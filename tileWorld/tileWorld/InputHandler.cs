@@ -65,7 +65,7 @@ namespace tileWorld
         {
             if (!used & IsMouseInsideWindow())
             {
-                if (mouseState.LeftButton == ButtonState.Pressed && holdTimer > .5f)
+                if (mouseState.LeftButton == ButtonState.Pressed && holdTimer > .2f)
                 {
                     used = true;
                     return true;
@@ -124,6 +124,23 @@ namespace tileWorld
             if (!used)
             {
                 if (keyState.IsKeyDown(key) & !previousKeyState.IsKeyDown(key))
+                {
+                    used = true;
+                    return true;
+                }
+                else
+                    return false;
+
+            }
+            else
+                return false;
+        }
+
+        public bool keyBoardKeyHold(Keys key)
+        {
+            if (!used)
+            {
+                if (keyState.IsKeyDown(key))
                 {
                     used = true;
                     return true;

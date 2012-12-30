@@ -22,11 +22,6 @@ namespace tileWorld
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        SpriteFont font;
-        
-        Texture2D debugBG;
-        Texture2D toolTip;
-
         Player player;
         World gameWorld;
         NPC_Manager npcManager;
@@ -34,7 +29,7 @@ namespace tileWorld
         InputHandler input;
         
         bool isplayerInNewChunk = false;
-        bool debugMode = false;
+        public static bool debugMode = false;
 
         int ChunkSizeWidth = 64; //size of chunks in tiles
         int ChunkSizeHeight = 64; //size of chunks in tiles
@@ -84,7 +79,7 @@ namespace tileWorld
 
             npcManager = new NPC_Manager(Content, gameWorld);
 
-            hud = new Hud(Content, GraphicsDevice, player);
+            hud = new Hud(Content, GraphicsDevice, player, gameWorld, npcManager);
 
             Camara.Location.X = (player.Position.X) - screenResWidth / 2;
             Camara.Location.Y = (player.Position.Y) - screenResHeight / 2;
@@ -98,11 +93,7 @@ namespace tileWorld
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            font = Content.Load<SpriteFont>(@"Fonts/Font-PF Arma Five");
-            //fontTiny = Content.Load<SpriteFont>(@"Fonts/Font-PF Arma Five");     
-            debugBG = Content.Load<Texture2D>(@"debugBG");
-        }
+         }
 
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
@@ -123,15 +114,10 @@ namespace tileWorld
             input.Update(gameTime);
             KeyboardState keyState = Keyboard.GetState();
          
-            if (input.keyBoardKeyPress(Keys.F3)) // Turn on Debug Modes 
+            if (input.keyBoardKeyHold(Keys.Q) & Game.debugMode)
             {
-                debugMode = !debugMode;
-                gameWorld.debug = !gameWorld.debug;
-            }
-
-            if (input.keyBoardKeyPress(Keys.Q) & debugMode)
-            {
-                npcManager.GenNPC_atPos(input.mousePos() + Camara.Location);
+                Vector2 NPCPositon = new Vector2((int)(input.mousePos().X + Camara.Location.X), (int)(input.mousePos().Y + Camara.Location.Y));
+                npcManager.GenNPC_atPos(NPCPositon);
             }
             if (input.keyBoardKeyPress(Keys.OemOpenBrackets))
             {
@@ -142,7 +128,7 @@ namespace tileWorld
                 Camara.zoom -= .01f;
             }
 
-            hud.Update(input, npcManager); 
+            hud.Update(input); 
             player.Update(gameTime, npcManager, input);
 
             gameWorld.Update(gameTime, player.Position);
@@ -182,27 +168,8 @@ namespace tileWorld
             
             spriteBatch.Begin(); // DONT ZOOM!
 
-            hud.Draw(spriteBatch);
+                hud.Draw(spriteBatch);
 
-            if (debugMode)
-            {
-                spriteBatch.Draw(debugBG, new Vector2(10,10), Color.White);
-                spriteBatch.DrawString(font, "CAMERA", new Vector2(15, 15), Color.White);
-                spriteBatch.DrawString(font, "Camera Pixel X , Y : " + Camara.Location.X + " , " + Camara.Location.Y, new Vector2(30, 30), Color.White);
-                spriteBatch.DrawString(font, "Camera Tile X , Y : " + (int)Camara.Location.X / TileSizeWidth + " , " + (int)Camara.Location.Y / TileSizeHeight, new Vector2(30, 45), Color.White);
-                
-                
-               // spriteBatch.DrawString(font, "Current Chunk last used time: " + gameWorld.getChunk((int)player.Position.X, (int)player.Position.Y).getLastUsed(), new Vector2(30, 55), Color.White);
-                spriteBatch.DrawString(font, "Current time: " + DateTime.Now, new Vector2(30, 65), Color.White);
-
-                spriteBatch.DrawString(font, "player Pos X , Y : " + (int)player.Position.X + " , " + (int)player.Position.Y, new Vector2(30, 75), Color.White);
-                spriteBatch.DrawString(font, "player Tile Pos : " + (int)(player.Position.X/TileSizeWidth) + " , " + (int)(player.Position.Y/TileSizeHeight), new Vector2(30, 85), Color.White);
-                spriteBatch.DrawString(font, "player standing : " + gameWorld.getCell((int)player.Position.X, (int)player.Position.Y).TileID, new Vector2(30, 95), Color.White);
-
-
-                if (isplayerInNewChunk)
-                    spriteBatch.DrawString(font, "In A New Chunk!", new Vector2(5, 110), Color.Blue);
-            }
             spriteBatch.End();
             base.Draw(gameTime);
         }

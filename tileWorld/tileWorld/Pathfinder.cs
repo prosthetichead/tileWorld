@@ -41,6 +41,9 @@ namespace tileWorld
 
             Cell currentCell = world.getCellFromPixelPos(startPoint);
             Cell endCell = world.getCellFromPixelPos(endPoint);
+            if (currentCell == endCell | endCell.Collision)
+                return null;
+
             PathNode current = new PathNode(currentCell, null, 0, 0);
             openList.Add(current);
             
@@ -54,7 +57,7 @@ namespace tileWorld
                     {
                         //int distance = (int)Vector2.Distance(cell.tilePosition, endCell.tilePosition);
                         int h = 10 * (int)(Math.Abs(cell.tilePosition.X - endCell.tilePosition.X) + Math.Abs(cell.tilePosition.Y - endCell.tilePosition.Y));
-                        int g = 10;
+                        int g = 10 + cell.OccupiedCount;
 
                         if (!nodeInList(cell, openList))
                         {
@@ -65,7 +68,7 @@ namespace tileWorld
                             PathNode node = getPathNodeByCell(cell, openList);
                             node.cost = g + h;
                         }
-                        cell.cost = h;
+                        cell.cost = g+h;
                     }
                 }
 

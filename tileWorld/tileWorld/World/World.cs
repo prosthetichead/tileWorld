@@ -13,8 +13,8 @@ namespace tileWorld
     {
         string WorldName;
         int range = 3;
-        int TileWidth;
-        int TileHeight;
+        public int TileWidth;
+        public int TileHeight;
         int ChunkWidth;
         int ChunkHeight;
         IDictionary<string, Chunk> chunkDictonary = new Dictionary<string, Chunk>();
@@ -30,7 +30,6 @@ namespace tileWorld
         SpriteFont fontTiny;
         ContentManager Content;
         
-        public bool debug = false;
 
         
         public World(ContentManager content, string worldName, int chunkWidth, int chunkHeight, int tileWidth, int tileHeight, Vector2 playerPos)
@@ -239,37 +238,43 @@ namespace tileWorld
             {
                 for (int x = -10; x < 50; x++)
                 {
+                    
 
                     pixelPosX = (x * GroundTiles.TileWidth) - (int)squareOffset.X;
                     pixelPosY = (y * GroundTiles.TileHeight) - (int)squareOffset.Y;
                     tilePosX = x + (int)firstSquare.X;
                     tilePosY = y + (int)firstSquare.Y;
-                    
-                    
-                   
-                    
+                    Color cellColor;
+
+
+
                     if ((cell = getCell(tilePosX, tilePosY)) == null)
                     {
                         cell = new Cell(0);
                     }
 
+                    if (Game.debugMode)
+                        cellColor = cell.debugColor;
+                    else
+                        cellColor = cell.color;
+
                     //Draw Cell
-                    GroundTiles.draw(spriteBatch, new Vector2(pixelPosX, pixelPosY), origin, cell.TileID, cell.color, .0001f);
+                    GroundTiles.draw(spriteBatch, new Vector2(pixelPosX, pixelPosY), origin, cell.TileID, cellColor, .0001f);
                     if (cell.TileEntityID > 0)
                     {
-                        TileEntites.draw(spriteBatch, new Vector2(pixelPosX + (TileEntites.TileWidth / 2), pixelPosY + (TileEntites.TileHeight)), new Vector2(TileEntites.TileWidth / 2, TileEntites.TileHeight - 5), cell.TileEntityID, cell.color);
+                        TileEntites.draw(spriteBatch, new Vector2(pixelPosX + (TileEntites.TileWidth / 2), pixelPosY + (TileEntites.TileHeight)), new Vector2(TileEntites.TileWidth / 2, TileEntites.TileHeight), cell.TileEntityID, cell.color);
                     }
 
-                    if (debug)
+                    if (Game.debugMode)
                     {
 
-                        spriteBatch.DrawString(fontTiny, ""+Camara.calculateDepth(pixelPosY), new Vector2(pixelPosX + 1, pixelPosY), Color.White, 0f, origin, 1f, SpriteEffects.None, Camara.calculateDepth(pixelPosY+10));
+                       // spriteBatch.DrawString(fontTiny, ""+cell.OccupiedCount, new Vector2(pixelPosX + 1, pixelPosY), Color.White, 0f, origin, 1f, SpriteEffects.None, Camara.calculateDepth(pixelPosY+10));
                         int Xpos = tilePosX - (int)(PlayerPos.X / TileWidth);
                         int Ypos = tilePosY- (int)(PlayerPos.Y/TileHeight);
                         if ((Math.Abs(tilePosX - (int)(PlayerPos.X / TileWidth)) < 5) & (Math.Abs(tilePosY - (int)(PlayerPos.Y / TileHeight)) < 5))
                         {
-                           // spriteBatch.DrawString(fontTiny, cell.tilePosition.X + ", " + cell.tilePosition.Y, new Vector2(pixelPosX + 1, pixelPosY), Color.White, 0f, origin, 1f, SpriteEffects.None, Camara.calculateDepth(pixelPosY + 10));
-                           // spriteBatch.DrawString(fontTiny, cell.chunkID, new Vector2(pixelPosX + 1, pixelPosY + 10), Color.White, 0f, origin, 1f, SpriteEffects.None, Camara.calculateDepth(pixelPosY + 10));
+                            spriteBatch.DrawString(fontTiny, cell.tilePosition.X + ", " + cell.tilePosition.Y, new Vector2(pixelPosX + 1, pixelPosY), Color.White, 0f, origin, 1f, SpriteEffects.None, Camara.calculateDepth(pixelPosY + 10));
+                           spriteBatch.DrawString(fontTiny, cell.chunkID, new Vector2(pixelPosX + 1, pixelPosY + 10), Color.White, 0f, origin, 1f, SpriteEffects.None, Camara.calculateDepth(pixelPosY + 10));
                        }
                     }       
                 }// END X ForLoop

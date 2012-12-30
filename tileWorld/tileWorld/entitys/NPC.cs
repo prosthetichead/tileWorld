@@ -48,7 +48,13 @@ namespace tileWorld
         private NPCData npcData;
         public AnimatedSprite NpcSprite;
         private Pathfinder pathfinder;
+        private World world;
         private List<Cell> cellPath;
+
+        private Cell previousCell;
+        private Cell currentCell;
+        private Cell previousPlayerCell;
+        private Cell currentPlayerCell;
         
         public enum state {walkingToPlayer, swimming, idle, returnHome, attacking};
         public state CurrentState = state.idle;
@@ -57,8 +63,11 @@ namespace tileWorld
 
         private float attackSpeedTimer = 2f;
         private float attackSpeed = 2f;
-        private float baseUpdatePathTime = 1f;
-        private float updatePathTime = 1f;
+        private int attackRange = 20;
+        Random rand = new Random();
+        int randomStep;
+        int randomSpeed;
+
 
         SpriteFont fontTiny;
         Texture2D debugRec;
@@ -80,7 +89,7 @@ namespace tileWorld
             npcData.OriginalPosition = npcData.Position;
             npcData.PixelPosition = npcData.Position * 32;
             npcData.visiblityRange = 300;
-            npcData.speed = 20;
+            npcData.speed = 30;
             npcData.Direction.X = 1;
 
             npcData.maxHP = 10;
@@ -88,16 +97,14 @@ namespace tileWorld
             NpcSprite = new AnimatedSprite(Content, textureName, npcHeight, npcWidth);
             fontTiny = Content.Load<SpriteFont>(@"Fonts/Font-PF Arma Five");
             pathfinder = new Pathfinder(world);
+            this.world = world;
             cellPath = new List<Cell>();
 
-            debugRec = Content.Load<Texture2D>(@"debugRec");
-        }
-        public NPC(ContentManager Content, NPCData npcData)
-        {
-            this.npcData = npcData;
+            randomStep = rand.Next(-15, 15);
+            randomSpeed = rand.Next(0, 5);
 
-            NpcSprite = new AnimatedSprite(Content, npcData.TextureName, npcData.NpcHeight, npcData.NpcWidth);
-            fontTiny = Content.Load<SpriteFont>(@"Fonts/Font-PF Arma Five");
+            debugRec = Content.Load<Texture2D>(@"debugRec");
+
         }
 
         public Vector2 getPixelPosition()
@@ -142,76 +149,73 @@ namespace tileWorld
 
         public void update(GameTime gameTime, Player player)
         {
-            float distanceToPlayer = Vector2.Distance(player.Position, npcData.Position);
-
             if (HP() <= 0)
-                dead = true;
-
-            if (distanceToPlayer <= npcData.visiblityRange)
             {
-                updatePathTime -= (float)gameTime.ElapsedGameTime.TotalSeconds;
-                CurrentState = state.walkingToPlayer; //Change State To walking
-                if (updatePathTime <= 0)
-                {
-                    cellPath = pathfinder.FindCellPath(npcData.Position, player.Position);
-                    updatePathTime = baseUpdatePathTime;
-                }
+                dead = true;
             }
             else
-                CurrentState = state.returnHome;
-             
-            if (distanceToPlayer <= 20)
-                CurrentState = state.attacking; 
-
-
-
-
-
-            if (CurrentState == state.walkingToPlayer)
             {
 
-                if (cellPath != null && cellPath.Count != 0)
-                {
+                float distanceToPlayer = Vector2.Distance(player.Position, npcData.Position);
+                Vector2 walktopos;
 
-                    if (Vector2.Distance(cellPath[0].pixelPositionCenter, npcData.Position) > 20)
+                if (distanceToPlayer <= npcData.visiblityRange)
+                {
+                    CurrentState = state.walkingToPlayer;
+                }
+                if (distanceToPlayer <= attackRange)
+                {
+                    CurrentState = state.attacking;    
+                }
+
+
+
+                if (CurrentState == state.walkingToPlayer)
+                {
+                    if (world.getCellFromPixelPos(player.Position) != currentPlayerCell)
                     {
-                        npcData.Direction = cellPath[0].pixelPositionCenter - npcData.Position;
-                        npcData.Direction.Normalize();
+                        randomStep = rand.Next(-15, 15);
+                        currentPlayerCell = world.getCellFromPixelPos(player.Position);
+                        cellPath = pathfinder.FindCellPath(npcData.Position, player.Position);
+                        if (cellPath != null)
+                            cellPath.RemoveAt(0);
                     }
-                    else
-                        cellPath.RemoveAt(0);
+
+                    if (cellPath != null && cellPath.Count > 0)
+                    {
+
+                        walktopos = new Vector2(cellPath[0].pixelPositionCenter.X + randomStep, cellPath[0].pixelPositionCenter.Y + randomStep);
+                        if (Vector2.Distance(walktopos, npcData.Position) > 1)
+                        {
+                            npcData.Direction = walktopos - npcData.Position;
+                            npcData.Direction.Normalize();
+                        }
+                        else
+                            cellPath.RemoveAt(0);
+
+                        npcData.Position += npcData.Direction * ((float)gameTime.ElapsedGameTime.TotalSeconds * (npcData.speed + randomSpeed));
+                    }
                 }
-            }
-            
-            if (CurrentState == state.returnHome)
-            {
-                npcData.Direction = npcData.OriginalPosition - npcData.Position;
-                if (Math.Abs(npcData.Direction.X) <= 5 | Math.Abs(npcData.Direction.Y) <= 5)
-                    CurrentState = state.idle;
-                npcData.Direction.Normalize();
-            }
-         
-            
-            if (CurrentState == state.idle)
-            {
-                npcData.Direction = Vector2.Zero;
-            }
-            if (CurrentState == state.attacking)
-            {
-                npcData.Direction = Vector2.Zero;
-                attackSpeedTimer = attackSpeedTimer - (float)gameTime.ElapsedGameTime.TotalSeconds;
-                
-                if (attackSpeedTimer <= 0)
+                if (CurrentState == state.idle)
                 {
-                    player.attacked(attackRoll());
-                    attackSpeedTimer = attackSpeed;
-                    
+                    npcData.Direction = Vector2.Zero;
                 }
+                if (CurrentState == state.attacking)
+                {
+                    npcData.Direction = Vector2.Zero;
+                    attackSpeedTimer = attackSpeedTimer - (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                    if (attackSpeedTimer <= 0)
+                    {
+                        player.attacked(attackRoll());
+                        attackSpeedTimer = attackSpeed;
+
+                    }
+                }
+
+
             }
-
-            npcData.Position += npcData.Direction * ((float)gameTime.ElapsedGameTime.TotalSeconds * npcData.speed);
-         }
-
+        }
         private int attackRoll()
         {
             // CALC A REAL ATTACK ROLL HERE!
@@ -229,9 +233,46 @@ namespace tileWorld
             npcData.PixelPosition -= Camara.Location;
             //System.Console.WriteLine("X, Y " + PixelPosition.X + "," + PixelPosition.Y);
 
-            spriteBatch.Draw(debugRec, BoundingBox, null, Color.Tomato, 0f, Vector2.Zero, SpriteEffects.None, 1f);
+           //spriteBatch.Draw(debugRec, BoundingBox, null, Color.Tomato, 0f, Vector2.Zero, SpriteEffects.None, 1f);
 
             NpcSprite.Draw(spriteBatch, npcData.PixelPosition);
         }
     }
 }
+
+
+
+
+
+
+//        if (cellPath != null && cellPath[0] == currentCell)
+//        {
+//            cellPath[0].exitCellintoPath();
+//            cellPath.RemoveAt(0); //dont walk to the cell your currenly on
+//        }
+//        updatePathTime = baseUpdatePathTime;
+//    }
+
+//    if (cellPath != null && cellPath.Count != 0)
+//    {
+
+//        if (world.getCellFromPixelPos(npcData.Position) == currentCell)
+//        {
+//            npcData.Direction = cellPath[0].pixelPositionCenter - npcData.Position;
+//            npcData.Direction.Normalize();
+//        }
+//        else
+//        {
+//            cellPath[0].exitCellintoPath();
+//            cellPath.RemoveAt(0);
+//        }
+//    }
+//}
+
+//if (CurrentState == state.returnHome)
+//{
+//    npcData.Direction = npcData.OriginalPosition - npcData.Position;
+//    if (Math.Abs(npcData.Direction.X) <= 5 | Math.Abs(npcData.Direction.Y) <= 5)
+//        CurrentState = state.idle;
+//    npcData.Direction.Normalize();
+//}

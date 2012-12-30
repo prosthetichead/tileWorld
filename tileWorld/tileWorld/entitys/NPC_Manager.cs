@@ -71,6 +71,11 @@ namespace tileWorld
                 npc.draw(spriteBatch);
             }
         }
+
+        public int npcCount()
+        {
+            return NPCs.Count;
+        }
     
     }
 
