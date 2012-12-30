@@ -246,7 +246,7 @@ namespace tileWorld
                 {
                     FacingDeg = MouseDeg;
                     meleeAttack(FacingDeg, npcManager);
-                    System.Console.WriteLine("ATTACK");
+                   // System.Console.WriteLine("ATTACK");
                 }
                 
                 attackTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -304,7 +304,7 @@ namespace tileWorld
             foreach (NPC npc in npcList)
             {
                 npc.attacked(5);
-                System.Console.WriteLine(npc);
+               // System.Console.WriteLine(npc);
             }
 
         }

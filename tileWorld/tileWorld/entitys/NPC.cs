@@ -70,6 +70,7 @@ namespace tileWorld
 
 
         SpriteFont fontTiny;
+        SpriteFont damageFont;
         Texture2D debugRec;
 
         /// <summary>
@@ -96,6 +97,7 @@ namespace tileWorld
 
             NpcSprite = new AnimatedSprite(Content, textureName, npcHeight, npcWidth);
             fontTiny = Content.Load<SpriteFont>(@"Fonts/Font-PF Arma Five");
+            damageFont = Content.Load<SpriteFont>(@"Fonts/Font-8bitoperator JVE");
             pathfinder = new Pathfinder(world);
             this.world = world;
             cellPath = new List<Cell>();
@@ -129,7 +131,7 @@ namespace tileWorld
 
             if (damageTaken > 0)
             {
-                MessageSystem.Instance.Show("" + damageTaken, new Vector2(npcData.PixelPosition.X, npcData.PixelPosition.Y - 5),1f, fontTiny, 1, Color.Cyan);
+                MessageSystem.Instance.Show("" + damageTaken, new Vector2(npcData.PixelPosition.X, npcData.PixelPosition.Y - 5),1f,damageFont, 1, Color.Violet);
 
                 return true;
             }
