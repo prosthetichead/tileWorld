@@ -132,7 +132,6 @@ namespace tileWorld
             if (damageTaken > 0)
             {
                 MessageSystem.Instance.Show("" + damageTaken, new Vector2(npcData.PixelPosition.X, npcData.PixelPosition.Y - 5),1f,damageFont, 1, Color.Violet);
-
                 return true;
             }
             else

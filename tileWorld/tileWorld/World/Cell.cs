@@ -10,9 +10,12 @@ namespace tileWorld
 {
     [Serializable]
     public class Cell
-    {
+    {   
         public int TileID;
-        public int TileEntityID;
+        public int TileEntityID = 0;
+        public int TileTreeID = 0;
+
+
         public bool Collision = false;
         public bool Liquid = false;
         public bool Hurt = false;
@@ -25,14 +28,19 @@ namespace tileWorld
         public Color debugColor = Color.White;
         public int cost = 0;
 
+        private Random random = new Random();
+        public int randomNumber;
+
         public Cell(int tileID)
         {
             TileID = tileID;
             TileEntityID = -1;
+            randomNumber = random.Next(-15, 15);
         }
 
         public Cell(int tileID, bool collision, bool liquid, bool hurt)
         {
+            randomNumber = random.Next(-15, 15);
             TileID = tileID;
             Collision= collision;
             Liquid =  liquid;

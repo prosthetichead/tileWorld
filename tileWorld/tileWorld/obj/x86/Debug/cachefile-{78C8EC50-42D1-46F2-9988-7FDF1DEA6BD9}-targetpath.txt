@@ -12,3 +12,4 @@ Content\Fonts\Font-PF Arma Five.xnb
 Content\Fonts\Font-PF Ronda Seven.xnb
 Content\Fonts\Font-8bitoperator JVE.xnb
 Content\debugRec.xnb
+Content\tileSets\TileTrees.xnb

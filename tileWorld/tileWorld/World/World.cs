@@ -27,6 +27,8 @@ namespace tileWorld
 
         TileSet GroundTiles;
         TileSet TileEntites;
+        TileSet TileTrees;
+
         SpriteFont fontTiny;
         ContentManager Content;
         
@@ -39,6 +41,8 @@ namespace tileWorld
             fontTiny = Content.Load<SpriteFont>(@"Fonts/Font-PF Arma Five");
             GroundTiles = new TileSet(content, tileWidth, tileHeight, "tileSets/groundTiles");
             TileEntites = new TileSet(content, tileWidth, tileHeight, "tileSets/TileEntites");
+            TileTrees = new TileSet(content, 64, 128, "tileSets/TileTrees");
+
             //ItemTiles = new tileSet(content, tileWidth, tileHeight, "tileSets/itemTiles");
 
             WorldName = worldName;
@@ -238,8 +242,9 @@ namespace tileWorld
             {
                 for (int x = -10; x < 50; x++)
                 {
-                    
 
+                    Random rand = new Random();
+                    int randPos = rand.Next(0, 0);
                     pixelPosX = (x * GroundTiles.TileWidth) - (int)squareOffset.X;
                     pixelPosY = (y * GroundTiles.TileHeight) - (int)squareOffset.Y;
                     tilePosX = x + (int)firstSquare.X;
@@ -262,9 +267,12 @@ namespace tileWorld
                     GroundTiles.draw(spriteBatch, new Vector2(pixelPosX, pixelPosY), origin, cell.TileID, cellColor, .0001f);
                     if (cell.TileEntityID > 0)
                     {
-                        TileEntites.draw(spriteBatch, new Vector2(pixelPosX + (TileEntites.TileWidth / 2), pixelPosY + (TileEntites.TileHeight)), new Vector2(TileEntites.TileWidth / 2, TileEntites.TileHeight), cell.TileEntityID, cell.color);
+                        TileEntites.draw(spriteBatch, new Vector2(pixelPosX + (TileEntites.TileWidth / 2), pixelPosY + cell.randomNumber + (TileEntites.TileHeight)), new Vector2(TileEntites.TileWidth / 2, TileEntites.TileHeight), cell.TileEntityID, cell.color);
                     }
-
+                    if (cell.TileTreeID > 0)
+                    {
+                        TileTrees.draw(spriteBatch, new Vector2(pixelPosX, pixelPosY + cell.randomNumber ), new Vector2(TileTrees.TileWidth/2, TileTrees.TileHeight), cell.TileTreeID, cell.color);
+                    }
                     if (Game.debugMode)
                     {
 

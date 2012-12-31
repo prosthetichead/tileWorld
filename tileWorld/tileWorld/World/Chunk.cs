@@ -219,11 +219,30 @@ namespace tileWorld
                         chunkData.ChunkBackGroundLayer[itX, itY].chunkID = chunkData.ChunkRootPosX + ", " + chunkData.ChunkRootPosY;
 
 
-                        if (r.Next(1, 100) < 30 & !chunkData.ChunkBackGroundLayer[itX, itY].Liquid)
+                        if (r.Next(1, 100) < 1 & chunkData.ChunkBackGroundLayer[itX, itY].TileID == 1)
+                        {
+                            chunkData.ChunkBackGroundLayer[itX, itY].TileEntityID = 1;
+                            chunkData.ChunkBackGroundLayer[itX, itY].Collision = true;
+                        }
+                        else if (r.Next(1, 100) < 10 & chunkData.ChunkBackGroundLayer[itX, itY].TileID == 1)
                         {
                             chunkData.ChunkBackGroundLayer[itX, itY].TileEntityID = 2;
                             chunkData.ChunkBackGroundLayer[itX, itY].Collision = true;
                         }
+                        else if (r.Next(1, 100) < 10 & chunkData.ChunkBackGroundLayer[itX, itY].TileID == 1)
+                        {
+                            if (r.Next(1, 100) < 2 & chunkData.ChunkBackGroundLayer[itX, itY].TileID == 1)
+                            {
+                                chunkData.ChunkBackGroundLayer[itX, itY].TileTreeID = 2;
+                                chunkData.ChunkBackGroundLayer[itX, itY].Collision = true;
+                            }
+                            else
+                            {
+                                chunkData.ChunkBackGroundLayer[itX, itY].TileTreeID = 1;
+                                chunkData.ChunkBackGroundLayer[itX, itY].Collision = true;
+                            }
+                        }
+
                         ++itX;
                     }
                     itX = 0;
