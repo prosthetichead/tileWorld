@@ -88,7 +88,7 @@ namespace tileWorld
             Rectangle sRectangle = new Rectangle(rectangleX * SpriteWidth, rectangleY * SpriteHeight, SpriteWidth, SpriteHeight);
             Rectangle dRectangle = new Rectangle((int)pixelPosition.X, (int)pixelPosition.Y, SpriteWidth, SpriteHeight);
 
-            spriteBatch.Draw(SpriteTextureMap, dRectangle, sRectangle, Color.White, rotation, origin,SpriteEffects.None, Camara.calculateDepth(pixelPosition.Y));
+            spriteBatch.Draw(SpriteTextureMap, dRectangle, sRectangle, Color.White, rotation, origin,SpriteEffects.None, Camara.calculateDepth(pixelPosition));
             
          //   spriteBatch.Draw(SpriteTexture, pixelPosition, Color.White);
         }

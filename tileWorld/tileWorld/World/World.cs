@@ -263,27 +263,32 @@ namespace tileWorld
                     else
                         cellColor = cell.color;
 
+
                     //Draw Cell
                     GroundTiles.draw(spriteBatch, new Vector2(pixelPosX, pixelPosY), origin, cell.TileID, cellColor, .0001f);
                     if (cell.TileEntityID > 0)
                     {
-                        TileEntites.draw(spriteBatch, new Vector2(pixelPosX + (TileEntites.TileWidth / 2), pixelPosY + cell.randomNumber + (TileEntites.TileHeight)), new Vector2(TileEntites.TileWidth / 2, TileEntites.TileHeight), cell.TileEntityID, cell.color);
+                        TileEntites.draw(spriteBatch, new Vector2(pixelPosX + (TileEntites.TileWidth / 2), pixelPosY  + (TileEntites.TileHeight)), new Vector2(TileEntites.TileWidth / 2, TileEntites.TileHeight), cell.TileEntityID, cell.color);
                     }
                     if (cell.TileTreeID > 0)
                     {
-                        TileTrees.draw(spriteBatch, new Vector2(pixelPosX, pixelPosY + cell.randomNumber ), new Vector2(TileTrees.TileWidth/2, TileTrees.TileHeight), cell.TileTreeID, cell.color);
+                        TileTrees.draw(spriteBatch, new Vector2(pixelPosX + TileWidth/2, pixelPosY + TileHeight), new Vector2(TileTrees.TileWidth/2, TileTrees.TileHeight), cell.TileTreeID, cell.color);
                     }
                     if (Game.debugMode)
                     {
 
-                       // spriteBatch.DrawString(fontTiny, ""+cell.OccupiedCount, new Vector2(pixelPosX + 1, pixelPosY), Color.White, 0f, origin, 1f, SpriteEffects.None, Camara.calculateDepth(pixelPosY+10));
-                        int Xpos = tilePosX - (int)(PlayerPos.X / TileWidth);
+                         int Xpos = tilePosX - (int)(PlayerPos.X / TileWidth);
                         int Ypos = tilePosY- (int)(PlayerPos.Y/TileHeight);
                         if ((Math.Abs(tilePosX - (int)(PlayerPos.X / TileWidth)) < 5) & (Math.Abs(tilePosY - (int)(PlayerPos.Y / TileHeight)) < 5))
                         {
-                            spriteBatch.DrawString(fontTiny, cell.tilePosition.X + ", " + cell.tilePosition.Y, new Vector2(pixelPosX + 1, pixelPosY), Color.White, 0f, origin, 1f, SpriteEffects.None, Camara.calculateDepth(pixelPosY + 10));
-                           spriteBatch.DrawString(fontTiny, cell.chunkID, new Vector2(pixelPosX + 1, pixelPosY + 10), Color.White, 0f, origin, 1f, SpriteEffects.None, Camara.calculateDepth(pixelPosY + 10));
+                            spriteBatch.DrawString(fontTiny, cell.tilePosition.X + ", " + cell.tilePosition.Y, new Vector2(pixelPosX + 2, pixelPosY+2), Color.White, 0f, origin, 1f, SpriteEffects.None, 1);
+                            spriteBatch.DrawString(fontTiny, cell.tilePosition.X + ", " + cell.tilePosition.Y, new Vector2(pixelPosX + 3, pixelPosY+3), Color.Black, 0f, origin, 1f, SpriteEffects.None, .9f);
+                           
+                            spriteBatch.DrawString(fontTiny, cell.chunkID, new Vector2(pixelPosX + 2, pixelPosY + 10), Color.White, 0f, origin, 1f, SpriteEffects.None, 1);
+                            spriteBatch.DrawString(fontTiny, cell.chunkID, new Vector2(pixelPosX + 3, pixelPosY + 11), Color.Black, 0f, origin, 1f, SpriteEffects.None, .9f);
                        }
+                      //  spriteBatch.DrawString(fontTiny, " " + Camara.calculateDepth(new Vector2(pixelPosX, pixelPosY)), new Vector2(pixelPosX + 2, pixelPosY + 20), Color.White, 0f, origin, 1f, SpriteEffects.None, 1);
+                       
                     }       
                 }// END X ForLoop
             } // END Y ForLoop

@@ -22,7 +22,7 @@ namespace tileWorld
         public Vector2 Direction = Vector2.Zero;
         public Vector2 MoveToPos = Vector2.Zero;
 
-        private float speed = 60f;
+        private float speed = 100f;
         private float attackTimer = .5f;
         private float attackTimerBase = .5f;
         private double FacingDeg = 0;

@@ -243,6 +243,9 @@ namespace tileWorld
                             }
                         }
 
+                        //set random value for cell
+                        chunkData.ChunkBackGroundLayer[itX, itY].randomNumber = r.Next(-15, 15);
+
                         ++itX;
                     }
                     itX = 0;

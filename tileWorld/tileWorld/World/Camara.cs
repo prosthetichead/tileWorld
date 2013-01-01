@@ -42,10 +42,12 @@ namespace tileWorld
             return transform;
         }
 
-         public static float calculateDepth(float Y)
+         public static float calculateDepth(Vector2 pos)
          {
-             int tileNumber = (int)(Y / tileHeight)+1;
-             return (Y+tileHeight) / 1000f;
+             //int tileNumber = (int)(Y / tileHeight)+1;
+             return (pos.Y + pos.X/1000) / 1000 ;
+
+             
          }
     }
 }

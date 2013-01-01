@@ -37,7 +37,7 @@ namespace tileWorld
             spriteBatch.Draw(TileSetTexture,
                     new Rectangle((int)position.X, (int)position.Y, TileWidth, TileHeight),
                     getSourceRectangle(tileID),
-                    color, 0f, origin, SpriteEffects.None, Camara.calculateDepth(position.Y));
+                    color, 0f, origin, SpriteEffects.None, Camara.calculateDepth(position));
         }
 
         public void draw(SpriteBatch spriteBatch, Vector2 position, Vector2 origin, int tileID, Color color, float Depth)
